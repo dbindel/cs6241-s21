@@ -1,0 +1,155 @@
+# ==================
+# Week 1
+#
+-
+  date: 2018-01-25
+  info: Introduction
+#
+# ==================
+# Week 2
+#
+-
+  date: 2018-01-30
+  info: Regression
+-
+  date: 2018-02-01
+  info: Regression
+  travel: Simons proposal meeting
+#
+# ==================
+# Week 3
+#
+-
+  date: 2018-02-06
+  info: Regression
+-
+  date: 2018-02-08
+  info: Regression
+#
+# ==================
+# Week 4
+#
+-
+  date: 2018-02-13
+  info: Matrix/tensor factorization
+-
+  date: 2018-02-15
+  info: Matrix/tensor factorization
+#
+# ==================
+# Week 5
+#
+-
+  date: 2018-02-20
+  break: February break
+-
+  date: 2018-02-22
+  info: Matrix/tensor factorization
+#
+# ==================
+# Week 6
+#
+-
+  date: 2018-02-27
+  info: Matrix/tensor factorization
+-
+  date: 2018-03-01
+  info: Low-dim structure in function approx
+#
+# ==================
+# Week 7
+#
+-
+  date: 2018-03-06
+  info: Low-dim struction in function approx
+-
+  date: 2018-03-08
+  info: Low-dim structure in function approx
+#
+# ==================
+# Week 8
+#
+-
+  date: 2018-03-13
+  travel: NSF panel
+  info: Guest lecture
+-
+  date: 2018-03-15
+  info: Low-dim structure in function approx
+#
+# ==================
+# Week 9
+#
+-
+  date: 2018-03-20
+  info: GPs, kernel regression, spatio-temporal data
+-
+  date: 2018-03-22
+  info: GPs, kernel regression, spatio-temporal data
+#
+# ==================
+# Week 10
+#
+-
+  date: 2018-03-27
+  info: GPs, kernel regression, spatio-temporal data
+-
+  date: 2018-03-29
+  info: GPs, kernel regression, spatio-temporal data
+#
+# ==================
+# Week 11
+#
+-
+  date: 2018-04-03
+  break: Spring break
+-
+  date: 2018-04-05
+  break: Spring break
+#
+# ==================
+# Week 12
+#
+-
+  date: 2018-04-10
+  info: Numerical methods for graph data
+-
+  date: 2018-04-12
+  info: Numerical methods for graph data
+#
+# ==================
+# Week 13
+#
+-
+  date: 2018-04-17
+  info: Numerical methods for graph data
+-
+  date: 2018-04-19
+  info: Numerical methods for graph data
+#
+# ==================
+# Week 14
+#
+-
+  date: 2018-04-24
+  info: Learning models of dynamics
+-
+  date: 2017-04-26
+  info: Learning models of dynamics
+#
+# ==================
+# Week 15
+#
+-
+  date: 2018-05-01
+  info: Learning models of dynamics
+-
+  date: 2018-05-03
+  travel: SIAM ALA
+#
+# ==================
+# Week 15
+#
+-
+  date: 2018-05-08
+  travel: SIAM ALA

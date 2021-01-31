@@ -1,0 +1,74 @@
+---
+title: Home
+layout: top
+---
+
+{% include cs6241_head.html %}
+
+<div class="row">
+  
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <h2>News</h2>
+    {% assign counter = 0 %}
+    {% for entry in site.data.news reversed %}
+    {%   if counter < 5 %}
+    {%     include news_entry.html %}
+    {%   endif %}
+    {%   assign counter = counter | plus: 1 %}                  
+    {% endfor %}
+    <a class="btn" href="news.html">Older news &raquo;</a>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <h2>Overview</h2>
+    <p>
+      In this class, we treat numerical methods underlying a variety
+      of modern machine learning and data analysis techniques.  The
+      course consists of six units of roughly two weeks each:
+    </p>      
+    <ul>
+      <li><b>Least squares and regression</b>: direct
+        and iterative linear and nonlinear least squares solvers;
+        direct randomized approximations and preconditioning;
+        Newton, Gauss-Newton, and IRLS methods
+        for nonlinear problems; regularization; robust regression.
+      </li>
+      <li><b>Matrix and tensor data decompositions</b>:
+        direct methods, iterations, and randomized
+        approximations for SVD and related decomposition methods;
+        nonlinear dimensionality reduction; non-negative matrix
+        factorization; tensor decompositions.
+      </li>
+      <li><b>Low-dimensional structure in function approximation</b>:
+        active subspace / sloppy model approaches to
+        identifying the most relevant parameters in high-dimensional input
+        spaces and model reduction approaches to identifying
+        low-dimensional structure in high-dimensional output spaces.
+      </li>
+      <li><b>Kernel interpolation and Gaussian processes</b>:
+        statistical and deterministic interpretations
+        and error analysis for kernel interpolation; methods for
+        dealing with ill-conditioned kernel systems; and methods for
+        scalable inference and kernel hyper-parameter learning.
+      </li>
+      <li><b>Numerical methods for graph data</b>:
+        implication of different graph structures for linear
+        solvers; graph-based coordinate embedding methods; analysis
+        methods based on matrix functions; computation of centrality
+        measures; and spectral methods for graph partitioning and
+        clustering.
+      </li>
+      <li><b>Learning models of dynamics</b>:
+        system identification and auto-regressive model fitting;
+        Koopman theory; dynamic mode decomposition.
+      </li>
+    </ul>        
+    <p>
+      See <a href="syllabus.html">the syllabus</a> for more
+      information on course logistics.
+    </p>
+
+  </div>
+  </div>
+  
+</div>
