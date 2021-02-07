@@ -7,11 +7,11 @@ layout:     main
 
 CS 6241, Spring 2021: Numerical Methods for Data Science  
 Lecture time: TR 2:45-4:00  
-Lecture location: Zoom
+Lecture location: [Zoom](https://www.cs.cornell.edu/~bindel/netid/zoom.html)
 
 Prof: [David Bindel](http://www.cs.cornell.edu/~bindel)  
 E-mail: <bindel@cornell.edu>  
-OH: Mon 2-4, Fri 12:30-1:30 or 2:00-3:00, or [by appointment](http://www.meetme.so/DavidBindel).
+OH: [Mon 2-4, Fri 12:30-1:30 or 2:00-3:00](https://www.cs.cornell.edu/~bindel/netid/zoom.html), or [by appointment](http://www.meetme.so/DavidBindel).
 
 
 ## Course description
