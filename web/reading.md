@@ -20,12 +20,12 @@ of them useful as well.
 If you want to refresh your general numerical analysis chops and have fun doing
 it, I recommend the _Afternotes_ books by Pete Stewart.  If you would like a
 more standard text that covers most of the background relevant to this class,
-you may like Heath's book (expanded for the "SIAM Classics" edition).  
+you may like Heath's book (expanded for the "SIAM Classics" edition).
 I was involved in a book on many of the same topics, together with Jonathan
-Goodman at NYU.  O'Leary's book on /Scientific Computing with Case Studies/
+Goodman at NYU.  O'Leary's book on _Scientific Computing with Case Studies_
 is probably the closest of the lot to the topics of this course, with
-particularly relevant case studies.  And Higham's /Accuracy and Stability of
-Numerical Methods/ is a magesterial treatment of all manner of error analysis
+particularly relevant case studies.  And Higham's _Accuracy and Stability of
+Numerical Methods_ is a magesterial treatment of all manner of error analysis
 (highly recommended, but perhaps not as a starting point).
 
 - [Afternotes on Numerical Analysis](https://epubs.siam.org/doi/book/10.1137/1.9781611971491) and [Afternotes Goes to Graduate School](https://epubs.siam.org/doi/book/10.1137/1.9781611971422), Stewart
