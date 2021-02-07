@@ -18,7 +18,7 @@ of them useful as well.
 ## General Numerics
 
 If you want to refresh your general numerical analysis chops and have fun doing
-it, I recommend the /Afternotes/ books by Pete Stewart.  If you would like a
+it, I recommend the _Afternotes_ books by Pete Stewart.  If you would like a
 more standard text that covers most of the background relevant to this class,
 you may like Heath's book (expanded for the "SIAM Classics" edition).  
 I was involved in a book on many of the same topics, together with Jonathan
@@ -28,9 +28,10 @@ particularly relevant case studies.  And Higham's /Accuracy and Stability of
 Numerical Methods/ is a magesterial treatment of all manner of error analysis
 (highly recommended, but perhaps not as a starting point).
 
-- [Afternotes on Numerical Analysis](https://epubs.siam.org/doi/book/10.1137/1.9781611971491) and [Afternotes Goes to Graduate School](https://epubs.siam.org/doi/book/10.1137/1.9781611971422)
-- [Scientific Computing: An Introductory Survey](https://epubs.siam.org/doi/book/10.1137/1.9781611975581)
-- [Scientific Computing with Case Studies](https://epubs.siam.org/doi/book/10.1137/9780898717723)
+- [Afternotes on Numerical Analysis](https://epubs.siam.org/doi/book/10.1137/1.9781611971491) and [Afternotes Goes to Graduate School](https://epubs.siam.org/doi/book/10.1137/1.9781611971422), Stewart
+- [Scientific Computing: An Introductory Survey](https://epubs.siam.org/doi/book/10.1137/1.9781611975581), Heath
+- [Principles of Scientific Computing](https://math.nyu.edu/faculty/shelley/Classes/SciComp/BindelGoodman.pdf), Bindel and Goodman
+- [Scientific Computing with Case Studies](https://epubs.siam.org/doi/book/10.1137/9780898717723), O'Leary
 - [Accuracy and Stability of Numerical Algorithms](https://epubs-siam-org.proxy.library.cornell.edu/doi/book/10.1137/1.9780898718027), Higham
 
 ## Numerical Linear Algebra
@@ -40,14 +41,14 @@ it as a reference when I think about how to teach.  Trefethen and Bau is
 another popular take, created from when Trefethen taught at Cornell CS.
 Golub and Van Loan's book on Matrix Computations ought to be on your shelf
 if you decide to do this stuff professionally, but I also like the depth
-of coverage in Stewart's /Matrix Algorithms/ (in two volumes).  And Elden's
-/Matrix Methods in Data Mining and Pattern Recognition/ is one of the closest
+of coverage in Stewart's _Matrix Algorithms_ (in two volumes).  And Elden's
+_Matrix Methods in Data Mining and Pattern Recognition_ is one of the closest
 books I've found to the spirit of this course (or at least part of it).
 
 - [Applied Numerical Linear Algebra](https://epubs.siam.org/doi/book/10.1137/1.9781611971446), Demmel
-- [Numerical Linear Algebra](https://newcatalog.library.cornell.edu/catalog/10504163)
-- [Matrix Algorithms, Vol 1](https://epubs-siam-org.proxy.library.cornell.edu/doi/book/10.1137/1.9781611971408) and [Matrix Algorithms, Vol 2](https://epubs.siam.org/doi/book/10.1137/1.9780898718058)
-- [Matrix Methods in Data Mining and Pattern Recognition](https://epubs.siam.org/doi/book/10.1137/1.9780898718867)
+- [Numerical Linear Algebra](https://newcatalog.library.cornell.edu/catalog/10504163), Trefethen and Bau
+- [Matrix Algorithms, Vol 1](https://epubs-siam-org.proxy.library.cornell.edu/doi/book/10.1137/1.9781611971408) and [Matrix Algorithms, Vol 2](https://epubs.siam.org/doi/book/10.1137/1.9780898718058), Stewart
+- [Matrix Methods in Data Mining and Pattern Recognition](https://epubs.siam.org/doi/book/10.1137/1.9780898718867), Elden
 
 ## Numerical Optimization
 
@@ -75,7 +76,7 @@ specifically the "statistics/data mining dictionary".
 
 - [Elements of Statistical Learning](https://web.stanford.edu/~hastie/ElemStatLearn/), Hastie, Tribshirani, and Friedman
 - [Pattern Recognition and Machine Learning](https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf), Bishop
-- [All of Statistics](https://link.springer.com/book/10.1007/978-0-387-21736-9)
+- [All of Statistics](https://link.springer.com/book/10.1007/978-0-387-21736-9), Wasserman
 
 ## Math Background
 
