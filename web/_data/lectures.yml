@@ -2,154 +2,139 @@
 # Week 1
 #
 -
-  date: 2018-01-25
+  date: 2021-02-09
   info: Introduction
+-
+  date: 2021-02-11
+  info: Optimization and linear algebra refresher
 #
 # ==================
 # Week 2
 #
 -
-  date: 2018-01-30
-  info: Regression
+  date: 2018-02-16
+  info: Regularized linear least squares
 -
-  date: 2018-02-01
-  info: Regression
-  travel: Simons proposal meeting
+  date: 2018-02-18
+  info: Sparse least squares and iterations
 #
 # ==================
 # Week 3
 #
 -
-  date: 2018-02-06
-  info: Regression
+  date: 2021-02-23
+  info: Stochastic gradients, scaling, and Newton
 -
-  date: 2018-02-08
-  info: Regression
+  date: 2021-02-25
+  travel: NSF panel
+-
 #
 # ==================
-# Week 4
+# Week 4 (SIAM CSE week)
 #
 -
-  date: 2018-02-13
-  info: Matrix/tensor factorization
+  date: 2021-03-02
+  info: Latent factor models
 -
-  date: 2018-02-15
-  info: Matrix/tensor factorization
+  date: 2021-03-04
+  info: SVD and other low-rank decompositions
 #
 # ==================
 # Week 5
 #
 -
-  date: 2018-02-20
-  break: February break
+  date: 2021-03-09
+  break: Wellness day
 -
-  date: 2018-02-22
-  info: Matrix/tensor factorization
+  date: 2021-03-11
+  info: Non-negative matrix factorization
 #
 # ==================
 # Week 6
 #
 -
-  date: 2018-02-27
-  info: Matrix/tensor factorization
+  date: 2021-03-16
+  info: Tensor eigenvectors and decompositions
 -
-  date: 2018-03-01
-  info: Low-dim structure in function approx
+  date: 2021-03-18
+  info: Tensor eigenvectors and decompositions
 #
 # ==================
 # Week 7
 #
 -
-  date: 2018-03-06
-  info: Low-dim struction in function approx
+  date: 2021-03-23
+  info: Nonlinear dimensionality reduction
 -
-  date: 2018-03-08
-  info: Low-dim structure in function approx
+  date: 2021-03-25
+  info: Function approximation fundamentals
 #
 # ==================
 # Week 8
 #
 -
-  date: 2018-03-13
-  travel: NSF panel
-  info: Guest lecture
+  date: 2021-03-30
+  info: Low-dim structure in function approximation
 -
-  date: 2018-03-15
-  info: Low-dim structure in function approx
+  date: 2021-04-01
+  info: Low-dim structure in function approximation
 #
 # ==================
 # Week 9
 #
 -
-  date: 2018-03-20
-  info: GPs, kernel regression, spatio-temporal data
+  date: 2021-04-06
+  info: Many interpretations of kernels
 -
-  date: 2018-03-22
-  info: GPs, kernel regression, spatio-temporal data
+  date: 2021-04-08
+  info: Approaches to kernel selection
 #
 # ==================
 # Week 10
 #
 -
-  date: 2018-03-27
-  info: GPs, kernel regression, spatio-temporal data
+  date: 2021-04-13
+  info: Computing with kernels
 -
-  date: 2018-03-29
-  info: GPs, kernel regression, spatio-temporal data
+  date: 2021-04-15
+  info: Scalable kernel methods
 #
 # ==================
 # Week 11
 #
 -
-  date: 2018-04-03
-  break: Spring break
+  date: 2021-04-20
+  info: Matrices associated with graphs
 -
-  date: 2018-04-05
-  break: Spring break
+  date: 2021-04-22
+  info: Function approximation on graphs
 #
 # ==================
 # Week 12
 #
 -
-  date: 2018-04-10
-  info: Numerical methods for graph data
+  date: 2021-04-27
+  info: Graph clustering and partitioning
 -
-  date: 2018-04-12
-  info: Numerical methods for graph data
+  date: 2021-04-29
+  info: Centrality measures
 #
 # ==================
 # Week 13
 #
 -
-  date: 2018-04-17
-  info: Numerical methods for graph data
+  date: 2021-05-04
+  info: Learning linear system dynamics
 -
-  date: 2018-04-19
-  info: Numerical methods for graph data
+  date: 2021-05-06
+  info: Learned dynamics and extrapolation
 #
 # ==================
 # Week 14
 #
 -
-  date: 2018-04-24
-  info: Learning models of dynamics
+  date: 2021-05-11
+  info: Koopman theory and lifting
 -
-  date: 2017-04-26
-  info: Learning models of dynamics
-#
-# ==================
-# Week 15
-#
--
-  date: 2018-05-01
-  info: Learning models of dynamics
--
-  date: 2018-05-03
-  travel: SIAM ALA
-#
-# ==================
-# Week 15
-#
--
-  date: 2018-05-08
-  travel: SIAM ALA
+  date: 2021-05-13
+  info: Learning nonlinear dynamics

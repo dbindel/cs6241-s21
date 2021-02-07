@@ -3,19 +3,16 @@ title:      Syllabus
 layout:     main
 ---
 
-*This is the S18 syllabus; current version in progress*
-
 ## Logistical information
 
-CS 6241, Spring 2018: Numerical Methods for Data Science  
-Lecture time: TR 2:55-4:10  
-Lecture location: Hollister B14
+CS 6241, Spring 2021: Numerical Methods for Data Science  
+Lecture time: TR 2:45-4:00  
+Lecture location: Zoom
 
 Prof: [David Bindel](http://www.cs.cornell.edu/~bindel)  
-425 Gates Hall  
-Phone: 607-255-5395  
-E-mail: <bindel@cs.cornell.edu>  
-OH: TBA or [by appointment](http://www.meetme.so/DavidBindel).
+E-mail: <bindel@cornell.edu>  
+OH: Mon 2-4, Fri 12:30-1:30 or 2:00-3:00, or [by appointment](http://www.meetme.so/DavidBindel).
+
 
 ## Course description
 
@@ -43,69 +40,87 @@ other areas of science and engineering.
 
 ### Course work
 
-The course work consists of:
+Notes and readings will be posted on the course web page.  We
+recommend reading the notes prior to the meeting.
 
-- *Lecture* (10%): Participation is expected!  Readings will sometimes be
-  posted in advance of meetings to prime discussion.
-- *Homework* (25%): There will be one homework per unit to 
-- *Scribe notes* (20%): Students will participate in developing a set of notes
-  over the course of the semester.  A template for the scribe notes is
-  provided [here][TODO].
-- *Final projects* (40%): The final project should be developed over the
-  course of the semester.  Projects will be subject to peer review and
-  evaluation (worth 10% of the grade).
+Class meetings will typically consist of an ice-breaker, open
+question, or group quiz, followed by lecture and full-class
+discussion.  We will try to reserve part of the time for small-group
+work involving either paper discussions or working through a
+Jupyter notebook.
 
-In addition, 5% of the grade is reserved for written feedback at the
-middle and end of the class.
+Other than activities to help students keep on track with the
+readings, the main course activity will be a course research project.
 
-### Course discussion system
+### Course technology
 
-This term we will be using Piazza for class discussion. Rather than
-emailing me questions, I encourage you to post your questions on
-Piazza. If you have any problems or feedback for the developers, email
-<team@piazza.com>.
-
-Find our class page at: <http://www.piazza.com/cornell/fall2018/cs6241>.
+The public course web page will be used for all activities that can
+readily be shared with the world.  Otherwise, we will use Canvas for
+assignments, together with integrations for discussion (Ed Discussion)
+and social annotation of the reading (Hypothes.is).  We will use
+Jupyter notebooks and the Julia programming language for in-class
+exercises; these can be run locally on your machine or via Google Colab.
 
 ## Course policies
 
 ### Grading
 
-Graded work will be weighted as follows:
+Graded work will be 50% a term research project, 45% participation,
+and 5% course feedback and evaluations.  On a 200 point scale, this
+will consist of:
 
-- Class participation and scribe notes: 40%
-- Final project: 60%
+#### Research project
+
+After an initial reaction paper (done individually), students will
+work in groups of 1-3 on a term-length research project.  Part of the
+credit will involve participating in peer review of contributions
+from two other groups.  The parts of this project will include:
+
+- Reaction paper involving reading and critique of at least two
+  papers - 10 points
+- Project proposal for 1-3 people, including pointers to related work
+  and a plan for how team members will work together - 10 points
+- Short progress report - 5 points
+- Draft report - 10 points
+- Peer review of two other draft reports - 10 points each
+- Final report - 40 points
+
+#### Participation and feedback
+
+After the first lecture where we lay out this syllabus, there will be
+25 additional lectures.  We ask for 90 points of "participation work,"
+defined as
+
+- Participating in a class opening activity or quiz (1 point)
+- Completing a class/homework notebook (1 point per question)
+- Written participation in class discussion of a paper (1 point)
+- Providing a (solved) question suitable for a homework (1 point)
+- Defining an open research question, with reference to literature (1 point)
+
+For homework, quizzes, or questions that are clearly incorrect, we
+will provide feedback and a chance to provide a correction (or
+convince us that we are wrong!).  Participation work does not have to
+be done wholly during class meetings.
 
 ### Collaboration
+
+Collaboration in this class is explicitly encouraged, as is reference
+to the research literature.  You can and should work together, with
+co-authorship for group assignments.
 
 An assignment is an academic document, like a journal article.
 When you turn it in, you are claiming everything in it is your
 original work, *unless you cite a source for it*.
 
-You are welcome to discuss homework and projects among yourselves in
-general terms.  However, you should not look at code or writeups from
-other students, or allow other students to see your code or writeup,
-even if the general solution was worked out together.  Unless we
-explicitly allow it on an assignment, we will not credit code or
-writeups that are shared between students (or teams, in the case of
-projects).
-
-If you get an idea from a classmate, the TA, a book or other published
-source, or elsewhere, please provide an appropriate citation.  This is
-not only critical to maintaining academic integrity, but it is also an
-important way for you to give credit to those who have helped you out.
-When in doubt, cite!  Code or writeups with appropriate citations will
-never be considered a violation of academic integrity in this class
-(though you will not receive credit for code or writeups that were
-shared when you should have done them yourself).
-
-### Academic Integrity
-
-We expect academic integrity from everyone.  School is stressful,
-and you may feel pressure from your coursework or other factors,
-but that is no reason for dishonesty!  If you feel you can't complete
-the work on the own, come talk to the professor, the TA, or your advisor,
-and we can help you figure out what to do.
+If you get an idea from a classmate, the TA or professor, a book or
+other published source, or elsewhere, please provide an appropriate
+citation.  This is not only critical to maintaining academic
+integrity, but it is also an important way for you to give credit to
+those who have helped you out.  When in doubt, cite!  Code or writeups
+with appropriate citations will never be considered a violation of
+academic integrity in this class (though you will not receive credit
+for code or writeups that were shared when you should have done them
+yourself).
 
 For more information, see Cornell's
 [Code of Academic Integrity](http://cuinfo.cornell.edu/Academic/AIC.html).
@@ -115,6 +130,5 @@ For more information, see Cornell's
 In the event of a major campus emergency, course requirements, deadlines, and
 grading percentages are subject to changes that may be necessitated by a
 revised semester calendar or other circumstances.  Any such announcements will
-be posted to [Piazza] and [the course home page](index.html).
+be posted to Canvas and [the course home page](index.html).
 
-[Piazza]: http://www.piazza.com/cornell/fall2018/cs6241
