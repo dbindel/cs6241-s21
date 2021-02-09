@@ -10,7 +10,7 @@ can be accessed via the Cornell library, though you may need to use
 [Passkey](https://www.library.cornell.edu/services/apps/passkey).
 
 If you want to know my take on much of the background for this class,
-I recommend [the notes from my own course](https://www.cs.cornell.edu/courses/cs4220/2017sp/schedule.html).  I also have some [background notes](https://www.cs.cornell.edu/courses/cs4220/2020sp/lec/background.pdf) that might be summarized as "things I might've assumed you knew" (correctly or incorrectly).
+I recommend [the notes from my own course](https://www.cs.cornell.edu/courses/cs4220/2017sp/schedule.html).  I also have some [background notes](https://www.cs.cornell.edu/courses/cs6241/2021sp/lec/background.pdf) that might be summarized as "things I might've assumed you knew" (correctly or incorrectly).
 
 I have taught [variants of this course](https://www.cs.cornell.edu/~bindel//blurbs/nmds.html) before, and you might find some
 of them useful as well.
