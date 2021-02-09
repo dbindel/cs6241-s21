@@ -3,7 +3,7 @@ TEXINPUTS:=.
 LEC= \
 	pdf/background.pdf \
 	pdf/2021-02-09.pdf \
-	pdf/2019-02-11.pdf 
+	pdf/2021-02-11.pdf 
 
 .PHONY: all copy
 all: $(LEC)
