@@ -7,7 +7,8 @@ I have never believed it possible to have too many books.  You should not think
 of these as required reading, but rather as references that you might find
 helpful along the way.  All the texts linked on this page are either open or
 can be accessed via the Cornell library, though you may need to use
-[Passkey](https://www.library.cornell.edu/services/apps/passkey).
+[Passkey](https://www.library.cornell.edu/services/apps/passkey).  We
+note abbreviations for the books where we actually assign readings.
 
 If you want to know my take on much of the background for this class,
 I recommend [the notes from my own course](https://www.cs.cornell.edu/courses/cs4220/2017sp/schedule.html).  I also have some [background notes](https://www.cs.cornell.edu/courses/cs6241/2021sp/lec/background.pdf) that might be summarized as "things I might've assumed you knew" (correctly or incorrectly).
@@ -45,7 +46,7 @@ of coverage in Stewart's _Matrix Algorithms_ (in two volumes).  And Elden's
 _Matrix Methods in Data Mining and Pattern Recognition_ is one of the closest
 books I've found to the spirit of this course (or at least part of it).
 
-- [Applied Numerical Linear Algebra](https://epubs.siam.org/doi/book/10.1137/1.9781611971446), Demmel
+- ALA: [Applied Numerical Linear Algebra](https://epubs.siam.org/doi/book/10.1137/1.9781611971446), Demmel
 - [Numerical Linear Algebra](https://newcatalog.library.cornell.edu/catalog/10504163), Trefethen and Bau
 - [Matrix Algorithms, Vol 1](https://epubs-siam-org.proxy.library.cornell.edu/doi/book/10.1137/1.9781611971408) and [Matrix Algorithms, Vol 2](https://epubs.siam.org/doi/book/10.1137/1.9780898718058), Stewart
 - [Matrix Methods in Data Mining and Pattern Recognition](https://epubs.siam.org/doi/book/10.1137/1.9780898718867), Elden
@@ -59,7 +60,7 @@ Boyd and Vandeberghe.  And given how much of data fitting revolves around
 linear and nonlinear least squares problems, we also mention an old favorite
 by Bjorck.
 
-- [Numerical Optimization](https://link.springer.com/book/10.1007/978-0-387-40065-5), Nocedal and Wright
+- NO: [Numerical Optimization](https://link.springer.com/book/10.1007/978-0-387-40065-5), Nocedal and Wright
 - [Practical Optimization](https://epubs.siam.org/doi/book/10.1137/1.9781611975604), Gill, Murray, and Wright
 - [Convex Optimization](https://web.stanford.edu/~boyd/cvxbook/), Boyd and Vandenberghe
 - [Numerical Methods for Least Squares Problems](https://epubs.siam.org/doi/book/10.1137/1.9781611971484), Bjorck
@@ -74,7 +75,7 @@ think is good) was Bishop.  And while you may decide not to read the entirety
 of Wasserman's book, I highly recommend at least reading the preface, and
 specifically the "statistics/data mining dictionary".
 
-- [Elements of Statistical Learning](https://web.stanford.edu/~hastie/ElemStatLearn/), Hastie, Tribshirani, and Friedman
+- ESL: [Elements of Statistical Learning](https://web.stanford.edu/~hastie/ElemStatLearn/), Hastie, Tribshirani, and Friedman
 - [Pattern Recognition and Machine Learning](https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf), Bishop
 - [All of Statistics](https://link.springer.com/book/10.1007/978-0-387-21736-9), Wasserman
 
