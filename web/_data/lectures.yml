@@ -8,6 +8,7 @@
   hw:
     - "[NO](https://link.springer.com/book/10.1007/978-0-387-40065-5), sec 2.1"
     - Getting-to-know you survey on Canvas
+    - "[Meeting notes](meetings/2021-02-09.html)"
 -
   date: 2021-02-11
   info: Optimization and linear algebra refresher
@@ -15,6 +16,7 @@
   hw:
     - "[ESL](https://web.stanford.edu/~hastie/ElemStatLearn/), sec 3.1-3.2"
     - "[ALA](https://epubs.siam.org/doi/book/10.1137/1.9781611971446), sec 3.2-3.2"
+    - "[Meeting notes](meetings/2021-02-11.html)"
 #
 # ==================
 # Week 2
