@@ -22,8 +22,7 @@ layout: main
         <th>Week</th>
         <th>Day</th>
         <th>Date</th>        
-        <th>Notes</th>
-        <th>Readings and HW</th>
+        <th>Notes, Readings, and HW</th>
       </tr>
     </thead>
     {% for lec in site.data.lectures %}
@@ -35,9 +34,8 @@ layout: main
       {% if lec.break %}
       <td>{{ lec.break }}</td>
       {% else %}
-      <td>{% if lec.info %}{% if lec.notes %}<a href="lec/{{ lec.notes }}">{{ lec.info }}</a>{% else %}{{ lec.info }}{% endif %}{% endif %}</td>
+      <td>{% if lec.info %}{% if lec.notes %}<a href="lec/{{ lec.notes }}">{{ lec.info }}</a>{% else %}{{ lec.info }}{% endif %}{% endif %}
       {% endif %}
-      <td>
         {% if lec.hw %}<ul>
           {% for item in lec.hw %}<li>{{ item | markdownify }}</li>{% endfor %}
         </ul>{% endif %}
