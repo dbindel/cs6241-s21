@@ -21,9 +21,11 @@
 -
   date: 2021-02-16
   info: Regularized linear least squares
+  notes: 2021-02-16.pdf
 -
   date: 2021-02-18
   info: Sparse least squares and iterations
+  notes: 2021-02-18.pdf
 #
 # ==================
 # Week 3
@@ -31,6 +33,7 @@
 -
   date: 2021-02-23
   info: Stochastic gradients, scaling, and Newton
+  notes: 2021-02-23.pdf
 -
   date: 2021-02-25
   info: Randomized numerical linear algebra
@@ -42,9 +45,11 @@
 -
   date: 2021-03-02
   info: Latent factor models
+  notes: 2021-03-02.pdf
 -
   date: 2021-03-04
   info: SVD and other low-rank decompositions
+  notes: 2021-03-04.pdf
 #
 # ==================
 # Week 5
