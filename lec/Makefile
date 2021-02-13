@@ -14,7 +14,7 @@ LEC= \
 .PHONY: all copy
 all: $(LEC)
 
-pdf/%.pdf: notes/%.tex
+pdf/%.pdf: notes/%.tex common.tex
 	xelatex -output-dir pdf $<
 	xelatex -output-dir pdf $<
 
