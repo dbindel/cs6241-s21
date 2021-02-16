@@ -30,6 +30,8 @@
     - "[ALA](https://epubs.siam.org/doi/book/10.1137/1.9781611971446), sec 3.5"
     - "[NO](https://link.springer.com/book/10.1007/978-0-387-40065-5), sec 3.3"
     - "[Rank Revealing QR Factorizations](https://www.cs.cornell.edu/courses/cs6241/2019sp/readings/Chan-1987-RRQR.pdf), T.F. Chan, LAA, 1987."
+    - "[Meeting notes](meetings/2021-02-16.html)"
+    - "[Julia notebook](meetings/nb-2021-02-16.ipynb)"
 -
   date: 2021-02-18
   info: Sparse least squares and iterations
