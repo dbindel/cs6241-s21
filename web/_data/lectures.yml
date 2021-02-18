@@ -40,6 +40,7 @@
     - "Ch 2 of [Templates for the Solution of Linear Systems](https://www.netlib.org/templates/templates.pdf), Barret et al."
     - "[LSQR: An algorthm for spare linear equations and sparse least squares](https://www.cs.cornell.edu/courses/cs6241/2019sp/readings/Paige-1982-LSQR.pdf), Paige and Saunders, ACM TOMS, 1982."
     - "[LSMR: An iterative algorithm for sparse least-squares problems](https://www.cs.cornell.edu/courses/cs6241/2019sp/readings/Fong-2011-LSMR.pdf), Fong and Saunders, SISC, 2011."
+    - "[Meeting notes](meetings/2021-02-18.html)"
 #
 # ==================
 # Week 3
