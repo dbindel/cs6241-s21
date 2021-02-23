@@ -51,6 +51,7 @@
   notes: 2021-02-23.pdf
   hw:
     - "[Optimization Methods for Large-Scale Machine Learning](https://www.cs.cornell.edu/courses/cs6241/2019sp/readings/Bottou-2018-opt.pdf), Bottou, Curtis, and Nocedal, SIREV"
+    - "[Meeting notes](meetings/2021-02-23.html)"
 -
   date: 2021-02-25
   info: Randomized numerical linear algebra
