@@ -15,6 +15,7 @@ OH: [Mon 2-4, Fri 12:30-1:30 or 2:00-3:00](https://www.cs.cornell.edu/~bindel/ne
 
 TA: Xinran Zhu  
 Email: <xz584@cornell.edu>
+OH: [Thu 10:00-12:00](https://cornell.zoom.us/j/93657705855?pwd=OGQ1Vm9NT083R0lXWDZBNVlDZ1dwdz09).
 
 ## Course description
 
