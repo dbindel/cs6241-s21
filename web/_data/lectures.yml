@@ -68,10 +68,24 @@
   date: 2021-03-02
   info: Latent factor models
   notes: 2021-03-02.pdf
+  hw:
+    - "[The Advanced Matrix Factorization
+      Jungle](https://sites.google.com/site/igorcarron2/matrixfactorizations),
+      I. Carron"
+    - "[ESL](https://web.stanford.edu/~hastie/ElemStatLearn/), 3.5.1 and 14.5"
 -
   date: 2021-03-04
   info: SVD and other low-rank decompositions
   notes: 2021-03-04.pdf
+  hw:
+    - "[On the relationships between SVD, KLT, and PCA](https://www.sciencedirect.com/science/article/pii/0031320381900820), Gerbrands,
+       Pattern Recognition, 1981"
+    - "[On the compression of low rank
+      matrices](https://epubs.siam.org/doi/abs/10.1137/030602678),
+      Cheng, Gimbutas, Martinsson, and Rokhlin, SISC 2005"
+    - "[CUR matrix decompositions for improved data
+       analysis](https://www.cs.cornell.edu/courses/cs6241/2019sp/readings/Mahoney-Drineas-2009-CUR.pdf),
+       Mahoney and Drineas, PNAS 2009"
 #
 # ==================
 # Week 5
