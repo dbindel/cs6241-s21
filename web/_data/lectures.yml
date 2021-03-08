@@ -103,6 +103,21 @@
   date: 2021-03-11
   info: Non-negative matrix factorization
   notes: 2021-03-11.pdf
+  hw:
+    - "[Nonnegative Matrix Factorization](https://epubs.siam.org/doi/book/10.1137/1.9781611976410) (Gillis), Chapter 1"
+    - "[The Whys and Hows of NMF](https://arxiv.org/abs/1401.5226), Gillis"
+    - "[Learning the parts of objects by non-negative matrix
+       factorization](https://www.cs.cornell.edu/courses/cs6241/2020sp/readings/Lee-Seung-1999-NMF.pdf),
+       Lee and Seung, Nature, 1999"
+    - "[Computing a nonnegative matrix factorization --
+       provably](https://www.cs.cornell.edu/courses/cs6241/2020sp/readings/Arora-2016-NMF.pdf),
+       Arora, Ge, Kannan, and Moitra, SICOMP, 2016"
+    - "[When Does NMF Give a Correct Decomposition into
+       Parts?](https://www.cs.cornell.edu/courses/cs6241/2020sp/readings/Donoho-Stodden-2003-separable.pdf),
+       Donoho and Stodden, NeurIPS, 2003"
+    - "[Algorithms for NMF and NTFs: a unified view based on block
+       coordinate descent framework](https://www.cc.gatech.edu/~hpark/papers/jgo.pdf),
+       Kim, He, and Park, J. Glob. Optim, 20113"
 #
 # ==================
 # Week 6
