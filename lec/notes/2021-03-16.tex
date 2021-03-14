@@ -1,0 +1,137 @@
+\documentclass[12pt, leqno]{article} %% use to set typesize
+\input{common}
+
+\begin{document}
+\hdr{2021-03-16} % And 18
+
+% Tensors as multi-way arrays, connections to multi-linear algebra
+% Vocabulary and why it's so awful!
+% Applications: Data compression, unsupervised learning, etc
+% Size, storage formats; symmetry
+% Matricization, Kronecker products, etc
+
+% CP = CANDECOMP/PARAFAC/Kruskal/etc
+% Tucker and HOSVD
+% Adaptive cross approximation, tensor CUR, HO interpolative decomp
+% Tensor trains and tensor networks
+% Non-negative decompositions
+
+% Matricization as a building block
+% Alternating least squares framework
+% Tensor eigenvalue problems, power method, etc; tensor moments
+% Randomized LA building blocks, SGD, etc
+
+\section{From Matrices to Tensors}
+
+Over the past three lectures, we have talked about various low-rank
+(approximate) matrix factorizations and their connection to analysis
+of array data.  We now turn to analysis techniques for array data
+with three or more indices, which we will refer to henceforth as
+{\em tensor data}.  Such tensor data comes in many forms:
+\begin{itemize}
+\item Three-dimensional spatial or space/time data sampled on a
+  regular grid;
+\item Colored image data (typically with three ``color dimensions'')
+  and hyperspectral image data (Which may contain many more ``color
+  dimensions'');
+\item Movie frames (represented as matrices) over time.
+\item Higher-order interaction data between different entities
+  (e.g. author, paper, term data in text analysis);
+\item Higher-order moment matrices in statistics (beyond means and covariances);
+\item Hypergraph data;
+\item And many others.
+\end{itemize}
+
+In linear algebra, matrices represent a variety of different objects,
+including general linear maps, operators, bilinear forms, and
+quadratic forms.  Tensors play a similar role in
+{\em multilinear algebra}, representing various types of multilinear
+maps and multilinear forms.  Alas, in the transition from considering
+operations with pairs of vector spaces to operations involving three
+or more such spaces, we complicate our life in two ways:
+\begin{itemize}
+\item {\em Notationally}: Matrix notation is concise, and easy to deal
+  with mechanically with a little experience.  In particular, we can
+  write matrix-matrix products and matrix-vector products just by
+  writing the operands involved in an order that makes sense, e.g.
+  \begin{align*}
+    (Ax)_i &= \sum_{j} a_{ij} x_j \\
+    (y^T A)_j &= \sum_{i} y_i a_{ij}
+  \end{align*}
+  When dealing with tensors involving more than two indices, the
+  generalization of matrix multiplication (known as {\em contraction}
+  on an index) cannot be so easily sorted out -- that is, there is no
+  simple notation as uniformly used for the operation
+  \[
+    b_{ik} = \sum_j a_{ijk} x_j
+  \]
+  as there is for matrix multiplication.  The reason is, I believe,
+  pretty simple: when dealing with matrices, we can write things to
+  the left of the matrix (for contraction on the first index) or to the
+  right of the matrix (for contraction on the second index).  When
+  dealing with tensors with more indices, this convention is no longer
+  possible.
+\item {\em Theoretically}: In linear algebra, we are able to take for
+  granted some rather remarkable things.  There are orthonormal bases
+  for the row and column space that allow us a diagonal matrix
+  representation (the SVD); the rank is a well-defined concept that
+  can be written as the number of nonzero singular values, the
+  dimension of the row space, or the dimension of the column space;
+  and more!  These concepts often become massively more complicated
+  with more than three indices.
+\end{itemize}
+Regardless of these challenges, we will charge forth and manage as
+best we can.
+
+\section{Tensor vocabulary}
+
+The {\em order} of a tensor is the number of indices, also known as
+ways or modes (this is sometimes called the rank of a tensor, but we
+will use rank to mean something else entirely).  {\em Fibers} are
+analogous to the rows and columns of a matrix, and are obtained by
+fixing all but one index.  For example, if $\mathcal{A}$ is a
+third-order tensor for which we write entries $a_{i,j,k}$, we can
+partition it into mode 1 fibers $a_{:,j,k}$, mode 2 fibers $a_{i,:,k}$
+and mode 4 fibers $a_{i,j,:}$ where the colon is used MATLAB/Julia
+style to refer to the full range of possible indices in the relevant
+slot.  We could also partition into matrix {\em slices},
+i.e.~$a_{:,:,k}$, $a_{:,j,:}$, or $a_{i,:,:}$.
+
+We will frequently work with tensors by ``flattening'' so that we deal
+with one or two indices (super-indices?).  A simple example of this
+that appears even in ordinary numerical linear algebra is the ``vec''
+of a matrix, which involves stacking the columns of a matrix, e.g.,
+\[
+  \operatorname{vec}\left(
+  \begin{bmatrix}
+    a_{11} & a_{12} \\
+    a_{21} & a_{22}
+  \end{bmatrix} \right) =
+  \begin{bmatrix} a_{11} \\ a_{21} \\ a_{12} \\ a_{21} \end{bmatrix}.
+\]
+More generally, the vec of a tensor corresponds to laying out the
+tensor entries in a single vector in column-major order (i.e.~the
+order where the leading indices vary fastest).
+
+\subsection{Vec, unfoldings, and matricization}
+\subsection{Outer produts, Kronecker, Tracy-Singh, Hadamard, and Katri-Rao}
+
+\section{The higher-order SVD and its computation}
+
+\section{Tucker and multilinear rank}
+
+\section{Tucker ALS}
+
+\section{CP decompositions and tensor rank}
+
+\section{CP ALS}
+
+\section{Other iterations}
+
+% SGD and Newton/quasi-Newton
+
+\section{CUR-type decompositions}
+
+\section{Tensor trains}
+
+\end{document}

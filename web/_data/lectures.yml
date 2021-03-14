@@ -125,10 +125,39 @@
 #
 -
   date: 2021-03-16
-  info: Tensor eigenvectors and decompositions
+  info: Tensor basics, HOSVD, Tucker, and ALS
+  hw:
+    - "[Tensor Decompositions and
+       Applications](https://epubs-siam-org.proxy.library.cornell.edu/doi/10.1137/07070111X),
+       Kolda and Bader, SIREV, 2009"
+    - "[Tensor Computations and Applications in Data
+       Mining](https://client.blueskybroadcast.com/siam08/pdf/s18.pdf),
+       Elden, slides from SIAM AM 2008"
+    - "[From Matrix to
+       Tensor](https://www.cs.cornell.edu/cv/OtherPdf/Mat2Ten.pdf), Van
+       Loan, slides from Cornell CS colloquium"
 -
   date: 2021-03-18
-  info: Tensor eigenvectors and decompositions
+  info: CP decomposition and algorithms, CUR and tensor trains
+  hw:
+    - "[Tensor Decompositions and
+       Applications](https://epubs-siam-org.proxy.library.cornell.edu/doi/10.1137/07070111X),
+       Kolda and Bader, SIREV, 2009"
+    - "[Tensor Decompositions: A Mathematical Tool for Data
+       Analysis](https://www.osti.gov/servlets/purl/1513637), Kolda,
+       slides from JMM 2018"
+    - "[Epsilon-ALS for Orthogonal Low-Rank Tensor
+        Approximation](https://epubs-siam-org.proxy.library.cornell.edu/doi/abs/10.1137/19M1303113),
+        Yang, SIMAX 2020"
+    - "[Low Multilinear Rank Approximations of
+        Tensors](https://epubs-siam-org.proxy.library.cornell.edu/doi/abs/10.1137/19M1237016),
+        Che, Wei, and Yan, SIMAX 2020"
+    - "[Low-Rank Approximation in the Frobenius Norm by Column and Row
+        Subset Selection](https://epubs-siam-org.proxy.library.cornell.edu/doi/abs/10.1137/19M1281848),
+       Cortinovis and Kressner, SIMAX 2020"
+    - "[Stochastic Gradients for Large-Scale Tensor
+        Decomposition](https://epubs-siam-org.proxy.library.cornell.edu/doi/abs/10.1137/19M1266265),
+        Kolda and Hong, SIMODS 2020"
 #
 # ==================
 # Week 7
