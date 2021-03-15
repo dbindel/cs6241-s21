@@ -136,9 +136,9 @@
     - "[From Matrix to
        Tensor](https://www.cs.cornell.edu/cv/OtherPdf/Mat2Ten.pdf), Van
        Loan, slides from Cornell CS colloquium"
-    - "[Tensors for Data Mining and Data Fusion](https://www.cs.ucr.edu/~epapalex/papers/tist16-tensors.pdf), Papalexakis, Faloutsos, and Sidriropoulos, ACM TIS, 2016"
-       Tensor](https://www.cs.cornell.edu/cv/OtherPdf/Mat2Ten.pdf), Van
-       Loan, slides from Cornell CS colloquium"
+    - "[Tensors for Data Mining and Data
+       Fusion](https://www.cs.ucr.edu/~epapalex/papers/tist16-tensors.pdf),
+       Papalexakis, Faloutsos, and Sidriropoulos, ACM TIS, 2016" 
 -
   date: 2021-03-18
   info: CP decomposition and algorithms, CUR and tensor trains
