@@ -170,6 +170,19 @@
 -
   date: 2021-03-23
   info: Nonlinear dimensionality reduction
+  hw:
+    - "[A global geometric framework for nonlinear dimensionality reduction](https://web.mit.edu/cocosci/Papers/sci_reprint.pdf),
+       Tenenbaum, de Silva, and Langford, Science 2000"
+    - "[Nonlinear dimensionality reduction by locally linear embedding](https://science.sciencemag.org/content/sci/290/5500/2323.full.pdf),
+       Roweis and Saul, Science 2000"
+    - "[Visualizing Data using t-SNE](https://www.jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf), van der Maaten and Hinton, JMLR
+       2008"
+    - "[Dimensionality Reduction: A Comparitive Review](https://lvdmaaten.github.io/publications/papers/TR_Dimensionality_Reduction_Review_2009.pdf), van der Maaten,
+      Postma, and van den Herik, Tech report 2009"
+    - "[Global versus local methods in nonlinear dimensionality reduction](https://web.mit.edu/cocosci/Papers/nips02-localglobal-in-press.pdf), de Silva and Tenenbaum, NeurIPS 2003"
+    - "[Large-scale SVD and manifold learning](https://www.jmlr.org/papers/v14/talwalkar13a.html), Talwalkar, Kumar, Mohri,
+       and Rowley, JMLR 2013"
+    - "[Accelerating t-SNE using tree-based algorithms](https://jmlr.org/papers/v15/vandermaaten14a.html), van der Maaten, JMLR 2014"
 -
   date: 2021-03-25
   info: Function approximation fundamentals
