@@ -187,6 +187,8 @@
 -
   date: 2021-03-25
   info: Function approximation fundamentals
+  hw:
+    - "[Class notebook](meetings/nb-2021-03-25.ipynb)"
 #
 # ==================
 # Week 8
