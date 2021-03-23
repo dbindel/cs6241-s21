@@ -189,6 +189,8 @@
   date: 2021-03-25
   info: Function approximation fundamentals
   hw:
+    - "[Nonlinear Approximation](https://www-cambridge-org.proxy.library.cornell.edu/core/journals/acta-numerica/article/nonlinear-approximation/C8E028C39B8A849690D0EC418516A934), DeVore, Acta Numerica 1998 - long, but please do read sections 1 and 9 at least"
+    - "[Approximation Theory and Approximation Practice](https://epubs-siam-org.proxy.library.cornell.edu/doi/book/10.1137/1.9781611975949), Trefethen, SIAM 2019 - a beautiful text, focused on polynomial and rational approximation in 1D; useful to skim, don't consider it assigned reading"
     - "[Class notebook](meetings/nb-2021-03-25.ipynb)"
 #
 # ==================
