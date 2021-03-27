@@ -206,10 +206,12 @@
     - "[Active Subspace Methods in Theory and Practice: Applications to Kriging Surfaces](https://epubs.siam.org/doi/10.1137/130916138), Constantine, Dow, and Wang, SISC 2014"
     - "[Active Manifolds: a non-linear analogue to Active Subspaces](https://arxiv.org/pdf/1904.13386.pdf), Bridges, Gruber, Felder, Verma, Hoff, ICML 2019"
     - "[Constrained global optimization of functions with low effective dimensionality using multiple random embeddings](https://arxiv-org.proxy.library.cornell.edu/abs/2009.10446), Cartis, Massart, Otemissov, arXiv 2020"
+-
   date: 2021-04-01
   info: Low-dim structure in function approximation
   hw:
     - "[Approximation of high-dimensional parametric PDEs](https://arxiv.org/pdf/1502.06797), Cohen, DeVore, Acta Numerica 2015"
+    - "[Model reduction via proper orthogonal decomposition](https://link-springer-com.proxy.library.cornell.edu/chapter/10.1007%2F978-3-540-78841-6_5), Pinnau, in Model Order Reduction: Theory, Research Aspects and Applications, Springer 2008"
     - "[Nonlinear model reduction via discrete empirical interpolation](https://epubs.siam.org/doi/abs/10.1137/090766498), Chaturantabut, Sorensen, SISC 2010"
 #
 # ==================
