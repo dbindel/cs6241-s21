@@ -201,6 +201,7 @@
 -
   date: 2021-03-30
   info: Low-dim structure in function approximation
+  notes: 2021-03-30.pdf
   hw:
     - "[Active Subspaces: Emerging Ideas for Dimension Reduction in Parameter Studies](https://epubs.siam.org/doi/book/10.1137/1.9781611973860), Constantine, SIAM 2015"
     - "[Active Subspace Methods in Theory and Practice: Applications to Kriging Surfaces](https://epubs.siam.org/doi/10.1137/130916138), Constantine, Dow, and Wang, SISC 2014"
