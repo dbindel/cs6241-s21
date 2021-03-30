@@ -1,0 +1,147 @@
+\documentclass[12pt, leqno]{article} %% use to set typesize
+\input{common}
+
+\begin{document}
+\hdr{2021-04-01}
+
+\section{Introduction}
+
+Last time, we discussed how to seek low-dimensional structure in the
+{\em input} space for functions $f : \Omega \subset \mathbb{R}^n
+\rightarrow \mathbb{R}$ for large $n$.  In this lecture, we consider
+how to find low-dimensional structure in the {\em output} space for
+$f : \Omega \subset \mathbb{R}^n \rightarrow \mathbb{R}^m$ where $m$ is
+large and $n$ is modest.
+
+Of course, it is also possible to combine the techniques to deal with
+high-dimensional input {\em and} output spaces, and this is frequently
+done in practice.
+
+
+\section{Interpolation and vector-valued functions}
+
+If $n$ is not too large and $f$ is smooth, a natural approach to
+approximating $f$ is interpolation.  That is, let
+$x_1, \ldots, x_k \in \mathbb{R}^n$ be sample points and let
+$L_1(x), \ldots, L_k(x)$ be the Lagrange functions (or cardinal
+functions) forming a $k$-dimensional basis for an approximation
+space $\mathcal{V}$ (with $\dim(\mathcal{V}) = k$).
+
+The Lagrange functions, we might recall, have the property that
+\[
+  L_i(x_j) = \delta_{ij};
+\]
+we remind ourselves of this now, as it will be important again later.
+If we start off with an arbitrary basis $v_1, \ldots, v_k$ for
+$\mathcal{V}$, we can compute the Lagrange functions as
+\[
+L_j(x) = 
+  \begin{bmatrix} v_1(x) & \ldots & v_k(x) \end{bmatrix}
+  \begin{bmatrix}
+    v_1(x_1) & v_2(x_1) & \ldots & v_k(x_1) \\
+    v_1(x_2) & v_2(x_2) & \ldots & v_k(x_2) \\
+    \vdots & \vdots & \ddots & \vdots \\
+    v_1(x_k) & v_2(x_k) & \ldots & v_k(x_k)
+  \end{bmatrix}^{-1} e_j,
+\]
+where $e_j$ is the $j$th column of the identity.
+Then we can compute our approximation as
+\[
+  f(x) \approx \hat{f}(x) = \sum_{j=1}^k f(x_j) L_j(x).
+\]
+To bound the error in such approximations, we use the same techniques
+described last time.  The error is within a factor of $\max_x \sum_j
+|L_j(x)|$ of the best possible in the space, and we can bound the
+latter in terms of Taylor expansions (for example).
+
+The approximations $L_j(x)$ depend on the space $\mathcal{V}$ and
+the points $\{x_j\}_{j=1}^k$.  It does not depend on the particular
+basis we choose for $\mathcal{V}$.  However, it {\em does} depend on
+the space $\mathcal{V}$!  With the same set of points, we can get many
+different interpolants associated with different approximation spaces
+(polynomial spaces, spline spaces, piecewise linear spaces, or
+others).  Different interpolation schemes are appropriate under
+different regularity assumptions: high-degree polynomial
+interpolation might make sense for interpolating very smooth $f$,
+but not for a function that is nondifferentiable because of an
+absolute value function (for example).
+
+Independent of the exact space $\mathcal{V}$, any method based on
+interpolation through points $\{x_1, \ldots, x_k\}$ will yield a
+result in the space $\mathrm{sp}[f(x_1), \ldots, f(x_k)]$.
+But we can extract approximations to $f(x)$ from this subspace in
+other ways than interpolating.  For example, suppose $f(x)$ is defined
+implicitly by a set of equations, e.g.
+\[
+  A(x) f(x) = b;
+\]
+then we can choose an approximation $f(x) = \sum_{j=1}^k c_j f(x_j)$
+by solving a proxy system with $k \ll n$ unknowns, which we might be
+able to do much more cheaply than solving a new system from scratch.
+This suggests that if we have some way to evaluate the quality of a
+solution without a full evaluation (e.g.~by looking at the residual
+norm for some defining equation), we might be able to use the
+subspace of approximations accessed by interpolation
+(which has at most dimension $k$), but with the coefficients
+determined by a reduced system of equations rather than by interpolation.
+
+\section{Learning from snapshots}
+
+If we are going to build a good approximating subspace from evaluation
+of $f$ at some sample points (sometimes called {\em snapshots}), we
+need a good method for choosing those sample points.  Some possible
+methods include:
+\begin{itemize}
+\item Choose $k$ points on some type of regular grid.
+\item Choosing $k$ points at random according to some distribution
+  (e.g.~uniform over the domain $\Omega$).
+\item Choose $k$ points according to a {\em low-discrepancy sequence}.
+\item Choose $k$ points according to an {\em experimental design}
+  method (e.g. using a Latin hypercube).
+\end{itemize}
+Sampling on regular grids must be done with some care to avoid
+aliasing issues when $f$ has some periodicity to it.  And random
+sampling tends to produce some ``clumps'' in our domain, and so we may
+get more evently spread points from a low-discrepancy sequence generator.
+
+Frequently, when we look at a collection of snapshots, we will
+discover that they have some redundancy to them.  In fact, we hope
+they do!  The {\em POD} (or {\em principle orthogonal directions})
+approach to reducing a snapshot collection basically involves an SVD:
+\[
+  \begin{bmatrix} f(x_1) & \ldots & f(x_k) \end{bmatrix} = U \Sigma V^T.
+\]
+If there is an $r$-dimensional subspace of the $k$-dimensional
+snapshot space that does a good job of capturing all the snapshots, we
+will have a small value for $\sigma_{r+1}$, and the truncated factor
+$U_r$ provides an orthonormal basis for the relevant space.
+
+Taking the SVD of a snapshot matrix can be seen as a discrete
+approximation of computing the eigendecomposition of
+\[
+  C = \int_{\Omega} f(x) f(x)^T \rho(x) \, dx
+\]
+for which the dominant $r$ eigenvectors span the ``optimal''
+$r$-dimensional invariant subspace for approximating general $f(x)$ in
+the domain.  In principle, we could try to approximate the difference
+between the integral and the finite sum (based on the smoothness of
+$f$), but we usually don't bother in practice.  If we have enough
+samples to reasonably cover the parameter space, we typically assume a
+small value $\sigma_{r+1}$ is good evidence that the whole image
+$f(\Omega)$ is well approximated by $U_r$.
+
+\section{Greedy methods and pivoted factorization}
+
+The POD approach 
+
+\section{Extracting solutions: Galerkin}
+
+\section{Extracting solutions: Interpolation}
+
+% Interpolation
+% Snapshot matrices
+% POD bases
+% Greedy Lagrange bases and pivoted factorization (complete pivoting)
+% Extracting solutions
+
+\end{document}

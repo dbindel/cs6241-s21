@@ -23,7 +23,7 @@ $n$ large) on a compact set $\Omega$.  We assume that our function has
 some type of regularity; the simplest case is assuming $f \in
 C^p(\Omega, \mathbb{R})$, i.e.~$f$ has $p$ continuous derivatives.  In
 this case, the optimal rate of uniform approximation as a function of
-sample points $N$ is $\|f-\hat{f}\|_\infty = O(n^{-p/n})$.  Hence, for
+sample points $N$ is $\|f-\hat{f}\|_\infty = O(N^{-p/n})$.  Hence, for
 functions where all we know in advance is bounded smoothness, the
 number of samples required to reach a given error tolerance grows
 exponentially with the dimension $n$.  This is one instance of the
@@ -111,7 +111,7 @@ The gradient based approach to computing the active subspace is to
 form
 \[
   U \Sigma V^T =
-  \frac{1}{sqrt{M}}
+  \frac{1}{\sqrt{M}}
   \begin{bmatrix} \nabla f(x_1) & \ldots \nabla f(x_M) \end{bmatrix},
 \]
 or (equivalently)
