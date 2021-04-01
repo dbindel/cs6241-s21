@@ -210,6 +210,7 @@
 -
   date: 2021-04-01
   info: Low-dim structure in function approximation
+  notes: 2021-04-01.pdf
   hw:
     - "[Approximation of high-dimensional parametric PDEs](https://arxiv.org/pdf/1502.06797), Cohen, DeVore, Acta Numerica 2015"
     - "[Model reduction via proper orthogonal decomposition](https://link-springer-com.proxy.library.cornell.edu/chapter/10.1007%2F978-3-540-78841-6_5), Pinnau, in Model Order Reduction: Theory, Research Aspects and Applications, Springer 2008"
