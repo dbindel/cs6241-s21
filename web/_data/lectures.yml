@@ -223,9 +223,21 @@
 -
   date: 2021-04-06
   info: Many interpretations of kernels
+  notes: 2021-04-06.pdf
+  hw:
+    - "[ESL](https://web.stanford.edu/~hastie/ElemStatLearn/), sec 14.5.4"
+    - "[Kernel techniques: From machine learning to meshless
+       methods](https://doi.org/10.1017/S0962492906270016), Schaback
+       and Wendland, Acta Numerica 2006"
+    - "[Gaussian Processes for Machine
+        Learning](http://www.gaussianprocess.org/gpml/), Rasumussen
+        and Williams, 2006 - read Ch 1"
+    - "[Kernel Methods in ML](https://www.cs.cornell.edu/courses/cs6241/2020sp/readings/Hofmann-2008-survey.pdf),
+       Hoffman, Scholkopf, Smola, Annals of Statistics, 2008"
 -
   date: 2021-04-08
   info: Approaches to kernel selection
+  notes: 2021-04-08.pdf
 #
 # ==================
 # Week 10
@@ -233,6 +245,7 @@
 -
   date: 2021-04-13
   info: Computing with kernels
+  notes: 2021-04-13.pdf
 -
   date: 2021-04-15
   info: Scalable kernel methods
