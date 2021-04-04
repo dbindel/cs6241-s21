@@ -291,9 +291,11 @@
 -
   date: 2021-04-20
   info: Matrices associated with graphs
+  notes: 2021-04-20.pdf
 -
   date: 2021-04-22
   info: Function approximation on graphs
+  notes: 2021-04-22.pdf
 #
 # ==================
 # Week 12
@@ -301,9 +303,11 @@
 -
   date: 2021-04-27
   info: Graph clustering and partitioning
+  notes: 2021-04-27.pdf
 -
   date: 2021-04-29
   info: Centrality measures
+  notes: 2021-04-29.pdf
 #
 # ==================
 # Week 13
