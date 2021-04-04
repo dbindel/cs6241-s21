@@ -292,10 +292,34 @@
   date: 2021-04-20
   info: Matrices associated with graphs
   notes: 2021-04-20.pdf
+  hw:
+    - "[Graph Algorithms in the Language of Linear
+       Algebra](https://epubs.siam.org/doi/book/10.1137/1.9780898719918),
+       Kepner and Gilbert, eds, SIAM 2011 - Ch 1-2"
+    - "[Graph spectral techniques in computer
+        sciences](https://www-jstor-org.proxy.library.cornell.edu/stable/43666153),
+        Arsic et al, Appl Anal Discrete Math, 2012"
+    - "[Mining Large
+        Graphs](https://www.cs.cornell.edu/courses/cs6241/2020sp/readings/Gleich-2016-mining.pdf),
+        Gleich and Mahoney, Handbook of modern statistical methods, 2016"
 -
   date: 2021-04-22
   info: Function approximation on graphs
   notes: 2021-04-22.pdf
+  hw:
+    - "[Semi-Supervised Learning Using Gaussian Fields and Harmonic
+        Functions](https://www.cs.cornell.edu/courses/cs6241/2020sp/readings/ZGL-2003-SSL.pdf),
+        Zhu, Gharhraman, and Lafferty, ICML 2003"
+    - "[Learning with Local and Global
+        Consistency](https://www.cs.cornell.edu/courses/cs6241/2020sp/readings/Zhou-2004-global-local.pdf),
+        Zhou, NeurIPS 2004"
+    - "[Empirical stationary correlations for semi-supervised learning
+        on
+        graphs](https://www.cs.cornell.edu/courses/cs6241/2020sp/readings/Xu-2010-kriging.pdf),
+        Xu, Dyer, and Owen, Ann Appl Stat, 2010"
+    - "[Using Local Spectral Methods to Robustify Graph-Based Learning
+        Algorithms](https://www.cs.cornell.edu/courses/cs6241/2020sp/readings/Gleich-2015-robustifying.pdf),
+       Gleich and Mahoney, KDD 2015"
 #
 # ==================
 # Week 12
@@ -304,10 +328,31 @@
   date: 2021-04-27
   info: Graph clustering and partitioning
   notes: 2021-04-27.pdf
+  hw:
+    - "[A tutorial on spectral
+        clustering](https://www.cs.cornell.edu/courses/cs6241/2020sp/readings/vonLuxburg-2007-spectral.pdf),
+        von Luxburg, Statistics and Computing 2007"
+    - "[Communities in
+        networks](https://www.cs.cornell.edu/courses/cs6241/2020sp/readings/Porter-2009-AMS.pdf),
+        Porter, Onnela, and Mucha, Notices of the AMS, 2009"
+    - "[Community detection in networks: A user
+        guide](https://www.cs.cornell.edu/courses/cs6241/2020sp/readings/Fortunato-2016-guide.pdf),
+        Fortunato and Hric, Physics Reports, 2016"
+    - "[Trace optimization and eigenproblems in dimension reduction
+       methods](https://www.cs.cornell.edu/courses/cs6241/2020sp/readings/Kokiopoulou-2011-trace.pdf),
+       Kokiopoulou, Chen, and Saad, NLAA, 2011"
 -
   date: 2021-04-29
   info: Centrality measures
   notes: 2021-04-29.pdf
+  hw:
+    - "[On the Limiting Behavior of Parameter-Dependent Network
+        Centrality
+        Measures](https://epubs.siam.org/doi/10.1137/130950550), Benzi
+        and Klymko, SIMAX 2015"
+    - "[PageRank Beyond the
+        Web](https://epubs.siam.org/doi/abs/10.1137/140976649),
+        Gleich, SIREV 2015"
 #
 # ==================
 # Week 13
