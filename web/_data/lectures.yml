@@ -234,10 +234,23 @@
         and Williams, 2006 - read Ch 1"
     - "[Kernel Methods in ML](https://www.cs.cornell.edu/courses/cs6241/2020sp/readings/Hofmann-2008-survey.pdf),
        Hoffman, Scholkopf, Smola, Annals of Statistics, 2008"
+    - "[Spline Models for Observational
+       Data](https://epubs.siam.org/doi/book/10.1137/1.9781611970128),
+       Wahba, SIAM 1990 - read the foreword in particular"
 -
   date: 2021-04-08
   info: Approaches to kernel selection
   notes: 2021-04-08.pdf
+  hw:
+    - "[Spline Models for Observational
+        Data](https://epubs.siam.org/doi/book/10.1137/1.9781611970128),
+        Wahba, SIAM 1990 - Ch 4"
+    - "[Gaussian Processes for Machine
+        Learning](http://www.gaussianprocess.org/gpml/), Rasumussen
+        and Williams, 2006 - read Ch 5"
+    - "[Automatic Model Construction with Gaussian
+        Processes](https://www.cs.toronto.edu/~duvenaud/thesis.pdf),
+        Duvenaud, Cambridge PhD dissertation, 2014 - read Ch 2"
 #
 # ==================
 # Week 10
@@ -246,9 +259,31 @@
   date: 2021-04-13
   info: Computing with kernels
   notes: 2021-04-13.pdf
+  hw:
+    - "[Spline Models for Observational
+        Data](https://epubs.siam.org/doi/book/10.1137/1.9781611970128),
+        Wahba, SIAM 1990 - Ch 11"
+    - "[Gaussian Processes for Machine
+        Learning](http://www.gaussianprocess.org/gpml/), Rasumussen
+        and Williams, 2006 - read Ch 8"
 -
   date: 2021-04-15
   info: Scalable kernel methods
+  hw:
+    - "[Kernel Interpolation for Scalable Structured
+        GPs](http://proceedings.mlr.press/v37/wilson15.pdf), Wilson and Nickisch, ICML 2015"
+    - "[Scalable Log Determinants for GP Kernel
+        Learning](http://arxiv.org/abs/1711.03481.pdf), Eriksson et al,
+        NeurIPS 2017"
+    - "[Scaling GP Regression with
+        Derivatives](http://arxiv.org/abs/1810.12283.pdf), Dong et al,
+        NeurIPS 2018"
+    - "[Exact GPs on a Million Data
+        Points](https://papers.nips.cc/paper/2019/hash/01ce84968c6969bdd5d51c5eeaa3946a-Abstract.html),
+        Wang et al, NeurIPS 2019"
+    - "[Fast estimation of tr(f(A)) via stochastic Lanczos
+        quadrature](https://doi.org/10.1137/16M1104974), Ubaru, Chen,
+        and Saad, SIMAX 2017"
 #
 # ==================
 # Week 11
