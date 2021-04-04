@@ -1,0 +1,774 @@
+\documentclass[12pt, leqno]{article} %% use to set typesize
+\input{common}
+\newcommand{\calI}{\mathcal{I}}
+
+\begin{document}
+\hdr{2021-04-13}
+
+% Basic tasks: parameters, hypers, prediction, predictive variance
+% Learning parameters and hypers (small n)
+% Scalability bottlenecks
+% Smooth kernels, pivoted Cholesky, and linear solves
+% Log determinant computations
+% Fast MVMs
+
+\section{The basic tasks}
+
+In the past two lectures, we have discussed various interpretations of
+kernels and how they are used for interpolation and regression.  In
+today's lecture, we focus on the numerical methods used to fit
+kernel-based models and to use them for prediction and uncertainty
+estimation.  More specifically, we consider four problems:
+\begin{itemize}
+\item
+  For a fixed kernel, how do we fit the {\em parameters} for a
+  kernel-based model?  That is, how do we compute $c$ such that
+  \[
+    \bar{f}(x) = \sum_{j=1}^n c_j k(x, x_j)
+  \]
+  approximately satisfies $\hat{f}(x_i) \approx y_i$, where $(x_i, y_i)$
+  are our observed data points?
+\item
+  Many kernels involve {\em hyper-parameters}, such as length scale
+  and smoothness parameters.  How should we determine these hyper-parameters?
+\item
+  How do we quickly evaluate the predicted values $\hat{f}(x)$ at
+  new points $x$?
+\item
+  How do we quickly evaluate measures that quantify uncertainty,
+  such as the predictive variance?
+\end{itemize}
+Because fitting model parameters and hyper-parameters is more costly
+than evaluating the predicted mean field or predictive variance, we
+will focus most of our attention on the fitting tasks.  We will also
+focus primarily on the probabilistic interpretation of kernels in
+terms of Gaussian processes.  Because we have in mind downstream tasks
+in which a user can adaptively obtain new data (as opposed to fitting
+to a fixed data set), we will also discuss incremental fitting.
+
+\section{Learning at small $n$}
+
+We initially consider the case where there are few enough data points
+that it makes sense to use standard direct factorization methods to solve the
+fitting problem.  These standard factorizations require $O(n^3)$ time,
+but if we use well-tuned libraries, the constants need not be large.
+Using a standard laptop, we can work with data sets of size greater
+than $n = 1000$ as a matter of routine.  The direct
+factorization approach is also useful as a starting point for scalable
+algorithms more appropriate to large $n$.
+
+\subsection{Cholesky and kernel-only fitting}
+
+The Cholesky factorization of a positive definite kernel matrix $K$ is
+\[
+  K = R^T R
+\]
+where $R$ is upper triangular.  The fitting system in the case of a
+positive definite kernel with no tail is
+\[
+  Kc = y,
+\]
+and the standard solution algorithm is a Cholesky factorization of $K$
+followed by two triangular solves
+\[
+  c = R^{-1} (R^{-T} y).
+\]
+The Cholesky factorization costs $O(n^3)$; the triangular solves each
+cost $O(n^2)$.  Hence, the cost is dominated by the cost of the
+Cholesky factorization.
+
+For computation, it is useful to think of the decomposition in block terms
+\[
+  \begin{bmatrix} K_{11} & K_{12} \\ K_{12}^T & K_{22} \end{bmatrix} =
+  \begin{bmatrix} R_{11}^T & 0 \\ R_{12}^T & R_{22}^T \end{bmatrix}
+  \begin{bmatrix} R_{11} & R_{12} \\ 0 & R_{22} \end{bmatrix}.
+\]
+Rearranging block-by-block, we have
+\begin{align*}
+  K_{11} &= R_{11}^T R_{11} &
+  R_{11}^T R_{11} &= K_{11} \\
+  K_{12} &= R_{11}^T R_{12} &
+  R_{12} &= R_{11}^{-T} K_{12} \\
+  K_{22} &= R_{12}^T R_{12} + R_{22}^T R_{22} &
+  R_{22}^T R_{22} &= K_{22} - R_{12}^T R_{12}
+\end{align*}
+That is, we can think of the decomposition in terms of a decomposition
+of the leading submatrix of $K$, a triangular solve to get an
+off-diagonal block, and then decomposition of the trailing {\em Schur
+  complement}
+\[
+  S_{22} = R_{22}^T R_{22} = K_{22} - R_{12}^T R_{12} = K_{22} - K_{21} K_{11}^{-1} K_{12}.
+\]
+The Schur decomposition has a meaning independent of the Cholesky
+factorization, as we can see by solving the system
+\[
+  \begin{bmatrix} R_{11}^T & 0 \\ R_{12}^T & R_{22} \end{bmatrix}
+  \begin{bmatrix} R_{11} & R_{12} \\ 0 & R_{22} \end{bmatrix} \\
+  \begin{bmatrix} X_1 \\ X_2 \end{bmatrix} =
+  \begin{bmatrix} 0 \\ I \end{bmatrix}.
+\]
+Block forward substitution gives
+\[
+  \begin{bmatrix} R_{11} & R_{12} \\ 0 & R_{22} \end{bmatrix}
+  \begin{bmatrix} X_1 \\ X_2 \end{bmatrix} =
+  \begin{bmatrix} 0 \\ R_{22}^{-T} \end{bmatrix}
+\]
+and block back substitution then yields
+\[
+  \begin{bmatrix} X_1 \\ X_2 \end{bmatrix} =
+  \begin{bmatrix} -R_{11}^{-1} R_{12} R_{22}^{-1} R_{22}^{-T}
+    \\ R_{22}^{-1} R_{22}^{-T} \end{bmatrix} =
+  \begin{bmatrix} -S_{11}^{-1} K_{12} S_{22}^{-1} \\ S_{22}^{-1} \end{bmatrix}.
+\]
+That is, the inverse of the Schur complement is a submatrix of the
+inverse of the original matrix
+$K$: $S_{22}^{-1} = \begin{bmatrix} K^{-1} \end{bmatrix}_{22}$.  In
+the Gaussian process setting, if $K$ is the covariance matrix, then
+$K^{-1}$ is the {\em precision matrix}, and $S_{22}^{-1}$ is the
+precision matrix of the posterior for the second block of variables
+conditioned on observations of data points from the first block.
+
+In introductory numerical methods courses, one typically first
+encounters the (scalar\footnote{The {\em scalar} version of the
+  algorithm works one column at a time.  Various {\em blocked} versions
+  of the factorization algorithm update in blocks of several columns
+  at a time, with a small (scalar) Cholesky factorization for the
+  diagonal blocks.  Block algorithms have the same complexity as the
+  corresponding scalar algorithms, but achieve better performance on
+  modern hardware because they make better use of the cache.
+}) {\em right-looking} version of the Cholesky algorithm:
+\begin{lstlisting}
+  % Overwrite K with the Cholesky factor R
+  for j = 1:n
+    K(j,j) = sqrt(K(j,j));
+    K(j,j+1:end) = K(j,j+1:end) / K(j,j);
+    K(j+1:end,j) = 0;
+    K(j+1:end,j+1:end) = K(j+1:end,j+1:end) - K(j,j+1:end)'*K(j,j+1:end);
+  end
+\end{lstlisting}
+At step $j$ of the loop, we have computed the first $j-1$ rows of $R$,
+and the trailing submatrix contains the Schur complement.  At the end
+of the step, we perform a rank 1 update to get a new (smaller) Schur
+complement matrix.
+
+An alternate organization, the {\em left-looking} version,
+defers the Schur complement update until it is needed:
+\begin{lstlisting}
+  % Overwrite K with the Cholesky factor R
+  K(1,1) = sqrt(K(1,1));
+  K(2:end,1) = 0;
+  for j = 2:n
+    K(1:j-1,j) = K(1:j-1,1:j-1) \ K(1:j-1,j)
+    K(j,1:j-1) = 0;
+    K(j,j) = sqrt(K(j,j) - K(1:j-1,j)'*K(1:j-1,j));
+  end
+\end{lstlisting}
+Both organizations of Cholesky do the same operations, but in a
+different order.  Both require $O(n^3)$ time; the dominant
+cost per step for the right-looking variant is the rank-1 update
+of the Schur complement, where the dominant cost per step for the
+left-looking variant is the triangular solve.
+
+The advantage of the left-looking factorization is that it can be
+applied {\em incrementally}.  That is, suppose that $K_{11}$
+corresponds to the kernel matrix associated with an initial sample
+of data points, and we have computed $K_{11} = R_{11}^T R_{11}$.
+Then to add a second set of data points, we can do a left-looking
+block update
+\begin{align*}
+  R_{12} &= R_{11}^{-T} K_{12} \\
+  R_{22}^T R_{22} &= K_{22} - R_{12}^T R_{12}
+\end{align*}
+The cost of this update is $O((n_1^2 + n_2^2) n_2)$, which is
+significantly less than the $O((n_1 + n_2)^3)$ cost of recomputing the
+factorization from scratch in the case that $n_2 \ll n_1$.
+
+\subsection{Fitting with a tail}
+
+We now consider fitting in the presence of a tail term.  Polynomial
+tails are typically used with conditionally positive definite kernel
+functions, but they can also be used with positive definite kernels
+--- and indeed they usually are used in some geostatistical
+applications.  One can also incorporate non-polynomial terms into
+the tail if they are useful to the model.
+
+The fitting problem with a tail looks like
+\[
+  \hat{f}(x) = \sum_i c_i k(x,x_i) + \sum_j d_j p_j(x)
+\]
+where the coefficients $d$ satisfy the discrete orthogonality
+condition
+\[
+  \sum_i p_j(x_i) d_i = 0
+\]
+for each basis function $p_j(x)$.  This gives us the linear system
+\[
+  \begin{bmatrix} K & P \\ P^T & 0 \end{bmatrix}
+  \begin{bmatrix} c \\ d \end{bmatrix} =
+  \begin{bmatrix} y \\ 0 \end{bmatrix}.
+\]
+We can also see this linear system from the perspective of constrained
+optimization: we are minimizing a quadratic objective (associated with $K$)
+subject to linear constraints (associated with $P$).  Note that this
+formulation is only well posed if $P$ is full rank, a condition
+sometimes known as unisolvency of the interpolation points.
+
+One way to deal with the tail term is the ``null space'' approach;
+that is, rather than adding equations that enforce the discrete
+orthogonality constraint, we find a coordinate system in which the
+discrete orthogonality constraint is automatic.  Specifically, suppose
+we write the full QR decomposition of $P$ as
+\[
+  P = \begin{bmatrix} Q_1 & Q_2 \end{bmatrix}
+      \begin{bmatrix} R_1 \\ 0 \end{bmatrix}.
+\]
+Then the constraint $P^T c = 0$ can be rewritten as $c = Q_2 w$,
+giving us
+\[
+  Q_2^T K Q_2 w = Q_2^T y
+\]
+where $Q_2^T K Q_2$ is generally symmetric and positive definite even
+for a conditionally positive definite kernel.  Once we have computed
+$w$ (and from there $c$), we can compute $d$ by the relation
+\[
+  R_1 d = Q_1^T (y-Kc).
+\]
+
+An alternate approach is to partition the data points into two
+groups, the first of which is unisolvent and has the same size as
+the dimension of the tail.
+Then we can write any $c$ satisfying $P^T c = 0$ in the form
+\[
+  \begin{bmatrix} c_1 \\ c_2 \end{bmatrix} =
+  \begin{bmatrix} -W^T \\ I \end{bmatrix} c_2
+\]
+where $W = P_2 P_1^{-1}$.  Substituting this into the constrained
+optimization of $c^T K c$ gives the reduced problem
+\[
+  \tilde{K}_{22} c_2 = (K_{22} - W K_{12} - K_{21} W^T + W K_{11} W) c_2 = y_2,
+\]
+from which we can recover the remaining coefficients by solving
+\begin{align*}
+  c_1   &= -W^T c_2 \\
+  P_1 d & = y_1 - K_{11} c_1 - K_{12} c_2.
+\end{align*}
+This reduction is formally equivalent to Gaussian elimination and
+substitution on the system
+\[
+  \begin{bmatrix}
+    0 & P_1^T & P_2^T \\
+    P_1 & K_{11} & K_{12} \\
+    P_2 & K_{21} & K_{22}
+  \end{bmatrix}
+  \begin{bmatrix} d \\ c_1 \\ c_2 \end{bmatrix} =
+  \begin{bmatrix} 0 \\ y_1 \\ y_2 \end{bmatrix}.
+\]
+As with the left-looking factorization described in the previous
+section, we can form $W$, $K$, $\tilde{K}_{22}$, and the Cholesky
+factorization of $\tilde{K}_{22}$ incrementally as new data points are added.
+
+\subsection{Likelihoods and gradients}
+
+Recall from the last lecture that the log likelihood function for a
+(mean zero) Gaussian process is
+\[
+\mathcal{L} =
+  -\frac{1}{2} y^T K^{-1} y - \frac{1}{2} \log \det K - \frac{n}{2} \log(2\pi).
+\]
+Given a Cholesky factorization $K = R^T R$, we can rewrite this as
+\[
+\mathcal{L} =
+  - \frac{1}{2} \|R^{-T} y\|^2 - \log \det R - \frac{n}{2} \log(2 \pi),
+\]
+and note that
+\[
+  \log \det R = \sum_{i} \log r_{ii}.
+\]
+The cost of evaluating the log likelihood is dominated by the cost of
+the initial Cholesky factorization.
+
+In order to optimize kernel hyper-parameters via maximum likelihood,
+we would also like to compute the gradient (and maybe the Hessian)
+with respect to the hyper-parameters.  Recall from last time that we
+computed the derivative
+\[
+  \delta \mathcal{L} =
+    \frac{1}{2} c^T [\delta K] c - \frac{1}{2} \tr(K^{-1} \delta K)
+\]
+where $Kc = y$.  Unfortunately, I know of no tricks to exactly compute
+$\tr(K^{-1} \delta K)$ for arbitrary $\delta K$ without in time less than
+$O(n^3)$ without exploiting additional structure beyond what we have
+discussed so far.
+
+Simply computing gradients of the log likelihood is sufficient for
+gradient descent or quasi-Newton methods such as BFGS.  However,
+if the number of hyper-parameters is not too great, we may also decide
+to compute second derivatives and compute a true Newton iteration.
+Let $\theta$ be the vector of hyper-parameters and use $[f]_{,j}$
+to denote the partial derivative of an expression $f$ with respect
+to $\theta_j$; then
+\begin{align*}
+  \left[ y^T K^{-1} y \right]_{,ij}
+  &= \left[ -y^T K^{-1} K_{,i} K^{-1} y
+     \right]_{,j} \\
+  &= 2 y^T K^{-1} K_{,i} K^{-1} K_{,j} K^{-1} y-
+       y^T K^{-1} K_{,ij} K^{-1} y \\
+  &= 2 c^T K_{,i} K^{-1} K_{,j} c -
+     c^T K_{,ij} c \\
+  \left[ \log \det K \right]_{,ij}
+  &= 
+  \left[
+    \tr\left( K^{-1} K_{,i} \right)
+  \right]_{,j} \\
+  &=
+  \tr\left(
+    K^{-1} K_{,ij} -
+    K^{-1} K_{,i} K^{-1} K_{,j}
+  \right) \\
+  \mathcal{L}_{,ij}  
+  &=
+  \frac{1}{2} c^T K_{,ij} c - c^T K_{,i} K^{-1} K_{,j} c -
+  \frac{1}{2} \tr\left( K^{-1} K_{,ij} - K^{-1} K_{,i} K^{-1} K_{,j} \right).
+\end{align*}
+Barring tricks that take advantage of further structure in the kernel
+matrix $K$ or its derivatives, computing these second partials has the
+same $O(n^3)$ complexity as computing the first derivatives.
+
+\subsection{Optimizing the nugget}
+
+An important special case is optimization with only a single
+hyper-parameter, the noise variance term or ``nugget''
+term\footnote{The term ``nugget'' comes from the use of Gaussian
+  process regression in geostatistical applications.  When trying
+  to use Gaussian processes to predict the location of precious
+  mineral deposits based on the mineral content in bore measurements,
+  it is necessary to account for the possibility that a measurement
+  may accidentally happen on a mineral nugget.}
+That is, we seek to maximize
+\[
+  \mathcal{L}(\eta) =
+    -\frac{1}{2} y^T (K + \eta I)^{-1} y - \frac{1}{2} \log \det (K + \eta I) -
+     \frac{n}{2} \log(2\pi).
+\]
+In this case, rather than doing a Cholesky factorization, we may
+choose to compute an eigenvalue decomposition $K = Q \Lambda Q^T$
+in order to obtain
+\[
+  \mathcal{L}(\eta) =
+    -\frac{1}{2} \hat{y}^T (\Lambda + \eta I)^{-1} \hat{y}
+    -\frac{1}{2} \log \det (\Lambda + \eta I) -
+    \frac{n}{2} \log(2\pi)
+\]
+where $\hat{y} = Q^T y$.  In this case, the stationary points
+satisfy a rational equation in $\eta$:
+\[
+\sum_{j=1}^n \left( \frac{\hat{y}_j^2}{(\lambda_j + \eta)^2}
+                 - \frac{1}{2 (\lambda_j + \eta)} \right) = 0.
+\]
+We can run Newton on this equation in $O(n)$ time per step.
+
+\section{Smooth kernels and low-rank structure}
+
+The cost of parameter fitting for a general kernel matrix is $O(n^3)$,
+and the cost of hyper-parameter fitting by a gradient-based method
+applied to maximization of the log-likelihood involves an
+additional $O(n^3)$ cost per hyper-parameter per step.  However,
+for {\em smooth} kernels, the kernel matrix (without a nugget term)
+may be effectively very low rank.  This case is of enough interest
+that we give it special treatment here.  More specifically, we assume
+a kernel matrix of the form
+\[
+  \tilde{K} = K + \eta I
+\]
+where most of the eigenvalues of $K$ are much less than $\eta$.  In
+this case, we can solve the fitting problem and the computation of the
+log-likelihood and gradients in much less than $O(n^3)$ time.
+
+\subsection{Pivoted Cholesky and kernel approximation}
+
+We begin with an outer product factorization of the kernel matrix $K$
+without a regularizing nugget.  Specifically, we consider
+the pivoted Cholesky factorization
+\[
+  \Pi^T K \Pi = R^T R
+\]
+where the diagonal elements of $R$ appear in descending order and
+the off-diagonal elements in each row of $R$ are dominated by the
+diagonal element.  The pivoted Cholesky factorization algorithm looks
+very much like the standard Cholesky algorithm, except before adding
+row $j$ to the $R$ factor, we first swap rows and columns $j$ and
+$j_{\max}$ of $K$, where $j_{\max}$ is the index of the largest entry
+in the Schur complement matrix.
+
+The approximation error associated with truncating the pivoted
+Cholesky factorization is just the Schur complement matrix;
+that is (suppressing the permutation momentarily),
+\[
+  \begin{bmatrix} K_{11} & K_{12} \\ K_{21} & K_{22} \end{bmatrix} -
+  \begin{bmatrix} R_{11}^T \\ R_{12}^T \end{bmatrix}
+  \begin{bmatrix} R_{11} & R_{12} \end{bmatrix} =
+  \begin{bmatrix} 0 & 0 \\ 0 & K_{22} - R_{12}^T R_{12} \end{bmatrix}
+\]
+Typically, we would stop the
+factorization when all the diagonal elements in the Schur
+complement are less than some tolerance.  Because the Schur complement
+is positive definite, the sum of the diagonal elements in the Schur
+complement is the same as the nuclear norm of the Schur complement,
+so controlling the size of the largest diagonal element also controls
+the approximation error in the nuclear norm (which dominates both the
+Frobenius norm and the spectral norm).
+
+Part of what makes pivoted Cholesky attractive is that we can run
+the algorithm {\em without ever forming $K$} --- we only need the rows
+of $K$ associated with the pivots selected up to the current step,
+plus a running computation of the diagonal of the Schur complement.
+If we have formed $j-1$ steps of the pivoted Cholesky factorization,
+we can extend the factorization by:
+\begin{itemize}
+\item Searching the Schur complement diagonal $d$ to find
+  the pivot row $j_{\max}$ and swapping points $j$ and
+  $j_{\max}$ and columns $j$ and $j_{\max}$ of $R$ (and $d$).
+\item Forming the top row of the current Schur complement using the formula
+  \[
+    s_{jl} = k(x_j, x_l) - \sum_{i=1}^{j-1} r_{ij} r_{il}
+  \]
+\item Extending the factorization with $s_{jj} = \sqrt{s_{jj}}$ and 
+  $r_{jl} = s_{jl} / r_{jj}$ for $l > j$.
+\item Updating the diagonal of the Schur complement via
+  $d_{ll}^{\mathrm{new}} = d_{ll} - r_{jl}^2$.
+\end{itemize}
+Running pivoted Cholesky in this way for $r$ steps only requires
+$O(nr)$ kernel evaluations, $O(nr)$ storage, and $O(nr^2)$ time.
+
+
+
+%% \subsection{Fitting with a tail}
+
+%% We can also use the pivoted Cholesky approach combined with the
+%% Gaussian elimination approach to solve a problem with
+%% a conditionally positive definite kernel and a tail term.  To do this,
+%% we first find a strongly linearly independent set of rows of $P$; we
+%% can do this by pivoted QR on $P^T$ or by Gaussian elimination with
+%% partial pivoting.  Once we have this set, as before we write $c$ as
+%% \[
+%%   \begin{bmatrix} c_1 \\ c_2 \end{bmatrix} =
+%%   \begin{bmatrix} -W^T \\ I \end{bmatrix} c_2
+%% \]
+%% where $W = P_2 P_1^{-1}$.  We then  
+%% solve the reduced (positive definite) system $\tilde{K}_{22} c_2 = y_2$
+%% where
+%% \[
+%%   \tilde{K}_{22} = K_{22} - W K_{12} - K_{21} W^T + W K_{11} W.
+%% \]
+%% Even though the original matrix is not positive definite,
+%% $\tilde{K}_{22}$ is.  Moreover, we can dynamically form the elements
+%% of $\tilde{K}_{22}$ as they are needed.
+
+%% The conditionally positive definite case (with a tail) is not
+%% conceptually that much more complex than the positive definite case,
+%% but the algebra is messier.  Hence, we will stay with the case of
+%% positive definite kernels through the rest.
+
+\subsection{The effects of truncation error}
+
+We now consider the solution of the linear system
+\[
+  (K + \eta I) c = y
+\]
+where $\eta I$ is the nugget term.  Suppose we have a low-rank
+factorization (computed by truncated pivoted Cholesky, for example)
+of the form $K \approx WW^T$.  Substituting gives us the approximate
+system
+\[
+  (W W^T + \eta I) \hat{c} = y.
+\]
+How close are $\hat{c}$ and $c$?  Let $K = W W^T + E$, i.e.~$E$ is
+the part of $K$ discarded by truncating a decomposition of $K$.
+Then subtracting the approximate linear systems gives
+\[
+  (K+\eta I) (c-\hat{c}) = E \hat{c},
+\]
+and norm bounds yield
+\[
+  \|c-\hat{c}\| \leq
+  \|(K+\eta I)^{-1} E\| \|\hat{c}\| \leq
+  \frac{\|E\|}{\eta} \|\hat{c}\|.
+\]
+where we have throughout used the matrix two-norm.  The matrix
+two-norm is bounded by the nuclear norm; and if $W$ comes from
+a pivoted Cholesky factorization, we can compute the
+nuclear norm of $E$ as the sum of the diagonal elements in the
+truncated Schur complement term.  Hence, if we use pivoted Cholesky
+with the termination criterion
+\[
+  \|S\|_* \leq \delta \eta,
+\]
+then we obtain the relative error bound
+\[
+  \frac{\|c-\hat{c}\|}{\|\hat{c}\|} \leq \delta
+\]
+if all computations are done in exact arithmetic.
+
+\subsection{Solving with the kernel}
+
+To solve a system $(WW^T + \eta I) c = y$ efficiently,
+let us introduce a new variable $z = W^T c$; putting together the
+definition of $z$ with the equation for $c$ gives us
+\[
+  \begin{bmatrix} \eta I & W \\ W^T & -I \end{bmatrix}
+  \begin{bmatrix} c \\ z \end{bmatrix} =
+  \begin{bmatrix} y \\ 0 \end{bmatrix}.
+\]
+Of course, we can eliminate $z$ to get back to the original
+equation; but what happens if we instead eliminate $c$?  Then we
+get the reduced system
+\[
+  (-I-\eta^{-1} W^T W) z = -\eta^{-1} W^T y.
+\]
+Multiplying through by $-\eta$ gives
+\[
+  (W^T W + \eta I) z = W^T y,
+\]
+Back substitution gives the formula
+\[
+  c = \frac{1}{\eta} \left( y - W (W^T W + \eta I)^{-1} W^T y \right).
+\]
+This is a special case of the famous Sherman-Morrison-Woodbury formula
+for the inverse of a matrix (in this case $\sigma^2 I$) plus a
+low-rank modification.
+
+While we can certainly work with the Sherman-Morrison-Woodbury formula
+directly, we can do a little better if we recognize that the equations in
+$z$ alone are the regularized normal equations for the optimization
+\[
+  \mbox{minimize } \frac{1}{2} \|W z - y\|^2 + \frac{\eta}{2} \|z\|^2.
+\]
+Furthermore, we have that
+\[
+  c = \eta^{-1} (y - W z);
+\]
+that is, $c$ is just the scaled residual of the least squares problem.
+In terms of an economy QR decomposition
+\[
+  \begin{bmatrix} W \\ \sqrt{\eta} I \end{bmatrix} =
+  \begin{bmatrix} Q_1 \\ Q_2 \end{bmatrix} R
+\]
+we have
+\[
+  c = \eta^{-1}\left( y - Q_1 (Q_1^T y) \right).
+\]
+This computational approach (using an economy QR decomposition) enjoys
+a modest stability advantage compared to working directly with the
+Sherman-Morrison-Woodbury formula.
+
+\subsection{Evaluating the kernel approximant}
+
+% Two different takes: original kernel or interpolated kernel
+We have so far treated the pivoted Cholesky approach as a way to
+approximate the kernel {\em matrix}.  Another interpretation is that
+we have computed a semidefinite kernel function
+\[
+  \hat{k}(x,y) = k_{x\calI} K_{\calI \calI}^{-1} k_{\calI x}
+\]
+where $\calI$ refers to the $r$ indices selected in the Cholesky
+factorization.  These two interpretations lead to the same linear
+system to approximate the coefficient vector $c$, but they suggest
+two different approximations to the function:
+\[
+  s(x) = \sum_{i=1}^n k(x, x_i) c_i
+  \quad \mbox{ or } \quad
+  \hat{s}(x) = \sum_{i=1}^n \hat{k}(x, x_i) c_i.
+\]
+The two approximations agree for points $x$ that are sufficiently
+close to the training data, but they may differ when $x$ is farther
+away.   The former approximation is the one that may have motivated us
+initially, but it is worth spending a moment on the second approximation.
+
+Writing $\hat{s}$ in matrix terms, we have
+\begin{align*}
+  \hat{s}(x)
+  &= \hat{k}_{xX} (\hat{K}_{XX} + \eta I)^{-1} y \\
+  &= k_{xI} K_{\calI \calI}^{-1} K_{\calI X}
+     ( K_{X \calI} K_{\calI \calI}^{-1} K_{\calI X} + \eta I)^{-1} y.
+\end{align*}
+Equivalently, we can write
+\[
+  \hat{s}(x) = k_{xI} d
+\]
+where (omitting some algebra) $d$ is the solution to the regularized
+least squares problem
+\[
+  \mbox{minimize }
+  \frac{1}{2} \|K_{XI} \hat{d}-y\|^2 + \frac{\eta}{2} d^T K_{II} d.
+\]
+If $K_{II} = R_{II}^T R_{II}$ is the leading part of the pivoted
+Cholesky factorization, we can rewrite this minimization as
+\[
+  \mbox{minimize }
+  \frac{1}{2} \left\|
+    \begin{bmatrix} K_{XI} \\ \sqrt{\eta} R_{II} \end{bmatrix} d -
+    \begin{bmatrix} y \\ 0 \end{bmatrix}
+  \right\|^2.
+\]
+Alternately, we can think of the pivoted Cholesky factorization as
+inducing a feature map associated with the approximate kernel
+$\hat{k}$:
+\begin{align*}
+  \hat{k}(x,y) &= \psi(x)^T \psi(y), &
+  \psi(x) &= R_{II}^{-T} k_{Ix}.
+\end{align*}
+Let $W$ denote the matrix of feature vectors (i.e.~row $i$ is
+$\psi(x_i)^T$); in the pivoted Cholesky factor, this is just
+$R_{I,:}^T$.  Then the approximation system involves solving
+\[
+  \mbox{minimize }
+  \frac{1}{2} \| W z - y \| + \frac{\eta}{2} \|z\|^2,
+\]
+which is the same minimization we saw in the previous subsection;
+and we can write the $\hat{s}(x)$ function as
+\[
+  \hat{s}(x) = \psi(x)^T z.
+\]
+
+\subsection{Predictive variance}
+
+Treating $k$ as the covariance kernel of a Gaussian process,
+the predictive variance at a test point $x$
+(conditioned on noisy data at points $X$) is
+\[
+  v(x) = k(x,x) - k_{xX} (K_{XX} + \eta I)^{-1} k_{Xx}.
+\]
+As in the previous section, we can again think about using low rank
+approximation in one of two ways: either we can use the low rank
+structure with the original kernel for the linear solve
+$(WW^T + \eta I)^{-1} k_{Xx}$; or we can think of the low rank
+factorization (via pivoted Cholesky) as defining the new kernel $\hat{k}$,
+for which the predictive variance is
+\[
+  \hat{v}(x) =
+    k_{x \calI} (K_{\calI \calI} + \eta^{-1} K_{\calI X} K_{X \calI})^{-1} k_{\calI x}.
+\]
+Using the Cholesky factorization
+$R_{\calI \calI}^T R_{\calI \calI} = K_{\calI \calI}$, we can rewrite
+\[
+  (K_{\calI \calI} + \eta^{-1} K_{\calI X} K_{X \calI})^{-1} = 
+  \eta \tilde{Q}_1^T \tilde{Q}_1
+\]
+where $\tilde{Q}_1$ comes from the economy QR decomposition
+\[
+  \begin{bmatrix} K_{X \calI} \\ \sqrt{\eta} R_{\calI \calI} \end{bmatrix} =
+  \begin{bmatrix} \tilde{Q}_1 \\ \tilde{Q}_2 \end{bmatrix}
+  \tilde{R},
+\]
+which we may have already formed in the process of computing the
+coefficients in $\hat{s}(x) = k_{x \calI} d$.
+
+% NB: Derivation is via Schur complement in
+% [-K_II, K_IX, k_Ix;
+%   K_XI, s*I,  0;
+%   k_xI, 0,    0;
+% Probably makes a good exercise...
+
+\subsection{Likelihoods and gradients}
+
+Recall the log likelihood function is
+\[
+  \mathcal{L} =
+  \frac{1}{2} y^T c - \frac{1}{2} \log \det \tilde{K} - \frac{n}{2} \log(2\pi)
+\]
+where $\tilde{K} = K + \eta I$ is the regularized kernel matrix.
+The first and last terms need no special treatment in the case when
+the kernel matrix has special structure, so long as we are able to
+rapidly compute the coefficient vector $c$.  The only non-obvious
+computation is the log determinant.
+
+Consider the regularized kernel matrix $\tilde{K} = WW^T + \eta I$ where
+$W \in \bbR^{n \times r}$, and suppose we write a full SVD for $W$:
+\[
+  W = U \Sigma V^T =
+    \begin{bmatrix} U_1 & U_2 \end{bmatrix}
+    \begin{bmatrix} \Sigma_1 \\ 0 \end{bmatrix}
+    V^T
+\]
+Then
+\[
+  U^T \tilde{K} U = \begin{bmatrix} \Sigma^2 + \eta I & 0 \\ 0 & \eta I_2 \end{bmatrix}
+\]
+Hence,
+\[
+  \log \det(\tilde{K}) = \log \det(U^T \tilde{K} U) =
+  \log \det(\Sigma^2 + \eta I) + (n-r) \log(\eta).
+\]
+If we use that $\Sigma^2 + \eta I$ is the eigenvalue matrix
+for $W^T W + \eta I = R^T R$, with $R$ computed by the economy QR
+we used for kernel solves, we have
+\[
+  \log \det(K) = 2 \sum_{j=1}^r \log(r_{jj}) - (n-r) \log \eta.
+\]
+
+What of the derivative of the log likelihood?  That is, we would like
+a fast method to compute
+\[
+  \delta L = \frac{1}{2} c^T (\delta \tilde{K}) c -
+             \frac{1}{2} \tr(\tilde{K}^{-1} \delta \tilde{K}).
+\]
+We can simplify the latter term by observing that
+\[
+  \tilde{K}^{-1} = \frac{1}{\eta} (I - Q_1 Q_1^T)
+\]
+where
+\[
+  \begin{bmatrix} W \\ \sqrt{\eta I} \end{bmatrix} =
+  \begin{bmatrix} Q_1 \\ Q_2 \end{bmatrix} R;
+\]
+substitution and using properties of traces gives us
+\[
+  \tr(\tilde{K}^{-1} \delta \tilde{K}) =
+    \frac{1}{\eta} \left( \tr(\delta \tilde{K}) -
+    \tr(Q_1^T \delta \tilde{K} Q_1) \right).
+\]
+If we work with the original kernel, it is difficult to do better
+than this.
+
+Now suppose we differentiate the log-likelihood for the approximate
+kernel induced by the points $\calI$, i.e.
+\[
+  \tilde{K}_{XX} = K_{X \calI} K_{\calI \calI}^{-1} K_{\calI X} + \eta I.
+\]
+Differentiating this expression gives us
+\[
+  \delta \tilde{K} =
+    (\delta K_{:,\calI}) F^T + F (\delta K_{:,\calI})^T -
+    F (\delta K_{\calI \calI}) F^T + (\delta \eta) I
+\]
+where $F = K_{:,\calI} K_{\calI \calI}^{-1}$.  Therefore
+\begin{align*}
+  \frac{1}{2} c^T (\delta K) c &=
+  (\delta K_{:,\calI} c)^T (Fc)
+  - \frac{1}{2} (Fc)^T (\delta K_{II}) (Fc) +
+  \frac{1}{2} \|c\|^2 \delta \eta \\
+  \frac{1}{2} \tr(\tilde{K}^{-1} \delta \tilde{K}) &=
+    \langle \tilde{F}, \delta K_{:,\calI} \rangle_F -
+    \frac{1}{2} \langle \tilde{F}, F \delta K_{\calI \calI} \rangle_F
+    + \delta \eta \left( n - \|Q_1\|_F^2 \right) \\
+  \tilde{F} &\equiv \frac{1}{\eta} (I-Q_1 Q_1^T) F
+\end{align*}
+and so we can compute derivatives of the log likelihood in $O(nr)$ space
+and $O(nr^2)$ time in this approximation.
+
+\subsection{Beyond low rank}
+
+For a number of kernels, the kernel matrix is not all that low rank
+--- the singular values decay, but not so quickly that we would be
+happy with $O(nr^2)$ time algorithms.  However, in low-dimensional
+spaces, one may still have low-rank {\em submatrices}, and there are
+fast factorization techniques based on these rank-structured matrices
+as well.   There are also a variety of iterative solvers that take
+advantage of fast matrix-vector multiplies; for example, we can use
+the method of conjugate gradients (CG) to solve linear systems using
+only matrix-vector products with a kernel matrix.  For these types of
+solvers, the low rank approximations using pivoted Cholesky as
+described above still give us a good {\em preconditioner} that can
+accelerate convergence.
+
+\end{document}
