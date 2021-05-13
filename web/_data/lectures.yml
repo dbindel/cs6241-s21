@@ -364,10 +364,20 @@
 -
   date: 2021-05-04
   info: Learning linear system dynamics
+  hw:
+    - "[Dynamic mode decomposition of numerical and experimental
+       data](https://hal-polytechnique.archives-ouvertes.fr/file/index/docid/1020654/filename/DMS0022112010001217a.pdf),
+       Schmid, JFM 2010"
+    - "[System
+       Identification](https://hal-polytechnique.archives-ouvertes.fr/file/index/docid/1020654/filename/DMS0022112010001217a.pdf),
+       Ljung, 2007"
 -
   date: 2021-05-06
   info: Learned dynamics and extrapolation
   hw:
+    - "[Data-Driven Science and
+        Engineering](https://www-cambridge-org.proxy.library.cornell.edu/core/books/datadriven-science-and-engineering/77D52B171B60A496EAFE4DB662ADC36E),
+        Brunton and Kutz, 2019 -- reach Ch 7"
     - "[Class notebook](meetings/nb-2021-05-06.ipynb)"
 #
 # ==================
@@ -376,8 +386,29 @@
 -
   date: 2021-05-11
   info: Koopman theory and lifting
+  hw:
+    - "[Dynamic mode decomposition with
+        control](https://arxiv.org/abs/1409.6358), Proctor, Brunton, and
+        Kutz, SIAM Applied Dyn Sys 2016"
+    - "[An eigensystem realization algorithm for modal parameter
+        identification and model
+        reduction](https://arc-aiaa-org.proxy.library.cornell.edu/doi/10.2514/3.20031),
+        Juang and Pappa, J. Guidance 1985"
+    - "[Hamiltonian Systems and Transformations in Hilbert
+       Space](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1076052/),
+       Koopman, PNAS 1931"
 -
   date: 2021-05-13
   info: Learning nonlinear dynamics
   hw:
+    - "[Discovering governing equations from data by sparse
+       identification of nonlinear dynamical
+       systems](https://www.pnas.org/content/pnas/113/15/3932.full.pdf),
+       Brunton, Proctor, Kutz, PNAS 2016"
+    - "[A Data-Driven Approximation of the Koopman Operator: Extending
+       Dynamic Mode Decomposition](https://arxiv.org/abs/1408.4408),
+       Williams, Kevrekidis, Rowley, J Nonlinear Science 2015"
+    - "[A Kernel-Based Method for Data-Driven Koopman Spectral
+        Analysis](https://arxiv.org/pdf/1411.2260.pdf), Williams, Rowley,
+        Kevrekidis, J Comp Dynamics 2015"
     - "[Class notebook](meetings/nb-2021-05-13.ipynb)"
