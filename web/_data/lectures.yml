@@ -379,3 +379,5 @@
 -
   date: 2021-05-13
   info: Learning nonlinear dynamics
+  hw:
+    - "[Class notebook](meetings/nb-2021-05-13.ipynb)"
